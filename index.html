@@ -1,53 +1,42 @@
-<!doctype html>
-<html lang="fa" dir="rtl">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>اتحادیه منچرز</title>
-<link rel="stylesheet" href="style.css">
-</head>
-<body>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
-<main class="app">
+html,
+body {
+  width: 100%;
+  min-height: 100%;
+}
 
-<header style="text-align:center;padding:20px">
-<h1>اتحادیه منچرز</h1>
-</header>
+body {
+  direction: rtl;
+  font-family: Tahoma, Arial, sans-serif;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(113, 35, 180, 0.28), transparent 35%),
+    linear-gradient(180deg, #080615 0%, #0b0717 55%, #05040c 100%);
+  color: #ffffff;
+}
 
-<section class="balance-card">
-<div class="balance-info">
-<div class="label">موجودی شما</div>
-<div class="amount">
-<b>۲,۵۸۰,۰۰۰</b>
-<span>تومان</span>
-</div>
-</div>
-</section>
+.app {
+  width: 100%;
+  max-width: 520px;
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: 18px 16px 30px;
+}
 
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:15px">
-<button class="details">افزایش موجودی</button>
-<button class="details">برداشت</button>
-</div>
+/* Header */
 
-<section class="history">
-<div class="history-head">
-<span>آمار بازی‌های ۲۴ ساعت گذشته</span>
-</div>
+header {
+  padding: 18px 10px 24px !important;
+}
 
-<div class="history-line">
-<span>بازی</span><b>12</b>
-<span>برد</span><b>8</b>
-<span>باخت</span><b>4</b>
-</div>
-</section>
-
-
-
-</main>
-
-</body>
-</html>
-
-
-
-
+header h1 {
+  font-size: 25px;
+  font-weight: 900;
+  letter-spacing: -0.5px;
+  color: #ffffff;
+  text-shadow:
+    0 0 8px rgba(255, 55
