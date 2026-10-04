@@ -15,7 +15,7 @@ html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text);font-f
 body{overflow-x:hidden}
 button{font:inherit;color:inherit}
 .app{
-  width:min(100%,720px);margin:auto;min-height:100vh;padding:28px 18px 118px;
+  width:min(100%,720px);margin:auto;min-height:100vh;padding:28px 18px 90px;
   background:
     radial-gradient(ellipse at 50% 12%,rgba(110,35,180,.18),transparent 42%),
     radial-gradient(ellipse at 50% 62%,rgba(100,24,150,.12),transparent 45%),
@@ -44,7 +44,7 @@ button{font:inherit;color:inherit}
 .stats{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid #40315d;direction:rtl}
 .stat{min-height:145px;padding:24px 10px 18px;text-align:center;border-left:1px solid #40315d;color:#9189a8;font-size:21px;line-height:1.55}
 .stat:first-child{border-left:0}
-.stat strong{display:block;color:#fff;font-size:30px;margin-top:8px}
+.stat strong{display:block;color:#fff;font-size:30px;margin-top:0px}
 .quick-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:28px;direction:rtl}
 .quick{min-height:226px;border:1px solid #6334a2;border-radius:50px;background:linear-gradient(180deg,#090622,#08051f);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;cursor:pointer;box-shadow:0 0 22px rgba(99,52,162,.06)}
 .quick.small{min-height:205px}
@@ -58,7 +58,7 @@ button{font:inherit;color:inherit}
 .quick-sub{font-size:15px;color:#7d7695}
 .quick:nth-child(4){grid-column:2}
 .quick:nth-child(5){grid-column:3}
-.history{margin-top:8px;border:1px solid #6334a2;border-radius:42px;padding:24px 22px;background:#090622}
+.history{margin-top:0px;border:1px solid #6334a2;border-radius:42px;padding:24px 22px;background:#090622}
 .history-head{display:flex;justify-content:space-between;align-items:center;gap:12px;color:#d99de7;font-size:22px;font-weight:700}
 .history-head button{border:1px solid #6d3aab;border-radius:24px;background:transparent;padding:8px 18px;color:#a996c4}
 .history-line{display:flex;justify-content:space-around;margin-top:22px;color:#827b9c;font-size:15px;align-items:center}
