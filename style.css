@@ -92,3 +92,5 @@ button{font:inherit;color:inherit}
   .quick-grid{gap:14px}.quick{min-height:205px;border-radius:43px}.quick.small{min-height:190px}.quick-title{font-size:21px}
   .history-head{font-size:18px}
 }
+
+.app{max-width:430px;padding:14px 12px 30px;margin:auto}.app header{padding:8px 0 14px}.app header h1{font-size:22px;margin:0}.balance-card{padding:18px;border-radius:24px}.balance-info{text-align:center}.label{font-size:13px}.amount{margin-top:6px}.amount b{font-size:28px}.amount span{font-size:13px}.details{margin-top:0;padding:11px 8px;font-size:13px;border-radius:14px}.history{margin-top:16px;padding:14px;border-radius:20px}.history-head{font-size:13px;margin-bottom:12px}.history-line{gap:8px}.history-line span{font-size:12px}.history-line b{font-size:20px}
