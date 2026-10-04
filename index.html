@@ -1,42 +1,117 @@
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>اتحادیه منچرز</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
 }
 
-html,
-body {
-  width: 100%;
-  min-height: 100%;
+body{
+  background:#070513;
+  color:#fff;
+  font-family:Tahoma,Arial,sans-serif;
+  min-height:100vh;
 }
 
-body {
-  direction: rtl;
-  font-family: Tahoma, Arial, sans-serif;
+.app{
+  max-width:520px;
+  margin:auto;
+  padding:14px 14px 25px;
+}
+
+/* HEADER */
+.header{
+  height:125px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  border-bottom:1px solid rgba(170,70,255,.25);
+  margin-bottom:18px;
+}
+
+.menu{
+  font-size:34px;
+  color:#e94cff;
+  line-height:1;
+}
+
+.logo{
+  text-align:center;
+}
+
+.logo-title{
+  font-family:cursive;
+  font-size:39px;
+  color:#f37cff;
+  text-shadow:0 0 18px #b400ff;
+}
+
+.logo-sub{
+  color:#ef55ff;
+  font-size:16px;
+  font-weight:bold;
+  margin-top:4px;
+}
+
+/* BALANCE */
+.balance{
+  border:1px solid #8c35ff;
+  border-radius:25px;
   background:
-    radial-gradient(circle at 50% 0%, rgba(113, 35, 180, 0.28), transparent 35%),
-    linear-gradient(180deg, #080615 0%, #0b0717 55%, #05040c 100%);
-  color: #ffffff;
+    radial-gradient(circle at 85% 20%,rgba(180,40,255,.2),transparent 30%),
+    linear-gradient(145deg,#0e0925,#0a0a1d);
+  box-shadow:0 0 25px rgba(135,35,255,.15);
+  overflow:hidden;
 }
 
-.app {
-  width: 100%;
-  max-width: 520px;
-  min-height: 100vh;
-  margin: 0 auto;
-  padding: 18px 16px 30px;
+.balance-main{
+  padding:22px 20px;
+  min-height:190px;
 }
 
-/* Header */
-
-header {
-  padding: 18px 10px 24px !important;
+.balance-title{
+  color:#bca7e8;
+  font-size:18px;
+  font-weight:bold;
+  margin-bottom:18px;
 }
 
-header h1 {
-  font-size: 25px;
-  font-weight: 900;
-  letter-spacing: -0.5px;
-  color: #ffffff;
-  text-shadow:
-    0 0 8px rgba(255, 55
+.balance-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+}
+
+.wallet{
+  width:68px;
+  height:68px;
+  border-radius:18px;
+  border:1px solid #a63cff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#15102b;
+  font-size:35px;
+}
+
+.amount{
+  flex:1;
+  text-align:center;
+}
+
+.amount-number{
+  font-size:29px;
+  font-weight:900;
+  white-space:nowrap;
+}
+
+.toman{
+  color:#f35cff;
+  font-size:14px
