@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+  <meta name="theme-color" content="#08051b">
+  <title>اتحادیه منچرز</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="app">
+
+    <header class="topbar">
+      <div class="header-tools">
+        <button class="tool square-dots" aria-label="گزینه‌ها"><i></i><i></i><i></i></button>
+        <button class="tool club" aria-label="نشان">♣</button>
+      </div>
+
+      <div class="brand">
+        <div class="brand-en">Unione</div>
+        <div class="brand-fa">اتحادیه منچرز</div>
+      </div>
+
+      <button class="tool hamburger" aria-label="منو">
+        <span></span><span></span><span></span>
+      </button>
+    </header>
+
+    <section class="balance-card">
+      <div class="balance-main">
+        <div class="crown" aria-hidden="true">♛</div>
+        <div class="balance-info">
+          <div class="label">موجودی کل</div>
+          <div class="amount"><b>۲,۵۸۰,۰۰۰</b><span>تومان</span></div>
+          <button class="details" onclick="toast('جزئیات موجودی')">◉ مشاهده جزئیات</button>
+        </div>
+      </div>
+
+      <div class="stats">
+        <div class="stat">
+          <div>موجودی قابل<br>برداشت</div>
+          <strong>۱,۹۸۰,۰۰۰</strong>
+        </div>
+        <div class="stat">
+          <div>مبلغ در انتظار</div>
+          <strong>۳۲۰,۰۰۰</strong>
+        </div>
+        <div class="stat">
+          <div>مبلغ رزرو<br>شده</div>
+          <strong>۲۸۰,۰۰۰</strong>
+        </div>
+      </div>
+    </section>
+
+    <section class="quick-grid">
+      <button class="quick" onclick="openPanel('games')">
+        <div class="quick-icon gamepad">⌁</div>
+        <div class="quick-title">بازی‌ها</div>
+        <div class="quick-sub">همه بازی‌ها</div>
+      </button>
+
+      <button class="quick" onclick="toast('عملیات سریع ماینر')">
+        <div class="quick-icon bolt">ϟ</div>
+        <div class="quick-title">ماینر</div>
+        <div class="quick-sub">عملیات سریع</div>
+      </button>
+
+      <button class="quick" onclick="toast('واریز / برداشت')">
+        <div class="quick-icon finance">□</div>
+        <div class="quick-title">مالی</div>
+        <div class="quick-sub">واریز / برداشت</div>
+      </button>
+
+      <button class="quick small" onclick="openPanel('security')">
+        <div class="quick-icon ring">◎</div>
+        <div class="quick-title">امنیت</div>
+        <div class="quick-sub">اثر انگشت</div>
+      </button>
+
+      <button class="quick small" onclick="openPanel('account')">
+        <div class="quick-icon circle">●</div>
+        <div class="quick-title">حساب</div>
+        <div class="quick-sub">پروفایل و تنظیمات</div>
+      </button>
+    </section>
+
+    <section class="history">
+      <div class="history-head">
+        <span>آمار بازی‌های ۲۴ ساعت گذشته</span>
+        <button onclick="toast('فیلتر آمار')">منچ ۷</button>
+      </div>
+      <div class="history-line">
+        <span>بازی‌ها</span><b>۱۲</b>
+        <span>برد</span><b>۸</b>
+        <span>باخت</span><b>۴</b>
+      </div>
+    </section>
+
+    <nav class="bottom-nav">
+      <button class="nav-item active" onclick="setActive(this)"><span>⌂</span><small>خانه</small></button>
+      <button class="nav-item" onclick="openPanel('games');setActive(this)"><span>⌘</span><small>بازی‌ها</small></button>
+      <button class="nav-item" onclick="toast('ماینر');setActive(this)"><span>ϟ</span><small>ماینر</small></button>
+      <button class="nav-item" onclick="toast('مالی');setActive(this)"><span>□</span><small>مالی</small></button>
+      <button class="nav-item" onclick="openPanel('account');setActive(this)"><span>●</span><small>حساب</small></button>
+    </nav>
+  </main>
+
+  <div class="overlay" id="overlay" onclick="closePanel(event)">
+    <section class="sheet" id="sheet">
+      <button class="sheet-close" onclick="closePanel()">×</button>
+      <h2 id="sheet-title">بازی‌ها</h2>
+      <div id="sheet-content"></div>
+    </section>
+  </div>
+
+  <div class="toast" id="toast"></div>
+  <script src="app.js"></script>
+</body>
+</html>
