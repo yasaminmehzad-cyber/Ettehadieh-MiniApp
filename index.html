@@ -1,84 +1,861 @@
-const games = [
-  ["🎲", "منچز", "ورود به بازی"],
-  ["🟪", "مارکرفت", "ورود به بازی"],
-  ["🎲", "تخت نرد (پلاتو)", "ورود به بازی"],
-  ["🃏", "حکم (سوبرا)", "ورود به بازی"]
-];
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>اتحادیه منچرز</title>
 
-function toast(msg) {
-  const el = document.getElementById("toast");
-  el.textContent = msg;
-  el.classList.add("show");
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
 
-  clearTimeout(window.__toast);
-  window.__toast = setTimeout(
-    () => el.classList.remove("show"),
-    1700
-  );
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
 }
 
-function openPanel(type) {
-  const overlay = document.getElementById("overlay");
-  const title = document.getElementById("sheet-title");
-  const content = document.getElementById("sheet-content");
-
-  if (type === "games") {
-    title.textContent = "بازی‌ها";
-
-    content.innerHTML = `
-      <div class="games">
-        ${games.map((g, i) => `
-          <button class="game" onclick="gameClick(${i})">
-            <div class="gicon">${g[0]}</div>
-            <strong>${g[1]}</strong>
-            <small>${g[2]}</small>
-          </button>
-        `).join("")}
-      </div>
-    `;
-
-  } else if (type === "security") {
-    title.textContent = "امنیت";
-
-    content.innerHTML = `
-      <div class="info">
-        امنیت حساب و ورود سریع در این بخش قرار می‌گیرد.<br>
-        اثر انگشت دستگاه بعد از اتصال Mini App
-        به محیط امن Telegram فعال می‌شود.
-      </div>
-    `;
-
-  } else {
-    title.textContent = "حساب";
-
-    content.innerHTML = `
-      <div class="info">
-        پروفایل، تنظیمات و اطلاعات حساب در این بخش قرار می‌گیرد.
-      </div>
-    `;
-  }
-
-  overlay.classList.add("show");
+body{
+  background:#070513;
+  color:#fff;
+  font-family:Tahoma,Arial,sans-serif;
+  min-height:100vh;
 }
 
-function closePanel(e) {
-  if (!e || e.target.id === "overlay") {
+.app{
+  max-width:520px;
+  margin:auto;
+  padding:14px;
+}
+
+/* HEADER */
+.header{
+  height:125px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  border-bottom:1px solid rgba(170,70,255,.25);
+  margin-bottom:18px;
+}
+
+.menu{
+  width:48px;
+  height:48px;
+  border:1px solid #a63cff;
+  border-radius:15px;
+  background:#120b25;
+  color:#ed54ff;
+  font-size:27px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+}
+
+.logo{
+  text-align:center;
+}
+
+.logo-title{
+  font-size:34px;
+  font-weight:900;
+  color:#f37cff;
+  text-shadow:0 0 18px #b400ff;
+}
+
+.logo-sub{
+  color:#ef55ff;
+  font-size:14px;
+  font-weight:bold;
+  margin-top:5px;
+}
+
+/* BALANCE */
+.balance{
+  border:1px solid #8c35ff;
+  border-radius:25px;
+  background:linear-gradient(145deg,#0e0925,#0a0a1d);
+  box-shadow:0 0 25px rgba(135,35,255,.15);
+  overflow:hidden;
+}
+
+.balance-main{
+  padding:22px 20px;
+}
+
+.balance-title{
+  color:#bca7e8;
+  font-size:17px;
+  font-weight:bold;
+  margin-bottom:18px;
+}
+
+.balance-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+}
+
+.wallet{
+  width:68px;
+  height:68px;
+  border-radius:18px;
+  border:1px solid #a63cff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#15102b;
+  font-size:34px;
+}
+
+.amount{
+  flex:1;
+  text-align:center;
+}
+
+.amount-number{
+  font-size:27px;
+  font-weight:900;
+}
+
+.toman{
+  color:#f35cff;
+  font-size:13px;
+  margin-top:5px;
+}
+
+.balance-actions{
+  display:flex;
+  border-top:1px solid rgba(170,70,255,.25);
+}
+
+.balance-actions button{
+  flex:1;
+  padding:16px;
+  background:none;
+  border:0;
+  color:#fff;
+  font-size:15px;
+  cursor:pointer;
+}
+
+.balance-actions button+button{
+  border-right:1px solid rgba(170,70,255,.25);
+}
+
+/* MENU PANEL */
+.overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.7);
+  display:none;
+  align-items:flex-end;
+  z-index:999;
+}
+
+.overlay.show{
+  display:flex;
+}
+
+.panel{
+  width:100%;
+  max-width:520px;
+  margin:auto;
+  background:#100a20;
+  border:1px solid #8c35ff;
+  border-bottom:0;
+  border-radius:25px 25px 0 0;
+  padding:20px;
+  box-shadow:0 -10px 40px rgba(130,30,255,.3);
+}
+
+.panel-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:18px;
+}
+
+.panel-head h2{
+  color:#f37cff;
+  font-size:20px;
+}
+
+.close{
+  width:40px;
+  height:40px;
+  border-radius:12px;
+  border:1px solid #7130aa;
+  background:#1b102e;
+  color:white;
+  font-size:22px;
+  cursor:pointer;
+}
+
+.menu-item{
+  width:100%;
+  padding:17px;
+  margin-top:10px;
+  border-radius:16px;
+  border:1px solid rgba(170,70,255,.3);
+  background:#171027;
+  color:white;
+  text-align:right;
+  font-size:16px;
+  cursor:pointer;
+}
+
+.menu-item:hover{
+  border-color:#c04cff;
+}
+
+/* TOAST */
+.toast{
+  position:fixed;
+  left:50%;
+  bottom:25px;
+  transform:translateX(-50%) translateY(20px);
+  background:#24113d;
+  border:1px solid #a63cff;
+  padding:13px 18px;
+  border-radius:14px;
+  opacity:0;
+  pointer-events:none;
+  transition:.25s;
+  z-index:2000;
+  white-space:nowrap;
+}
+
+.toast.show{
+  opacity:1;
+  transform:translateX(-50%) translateY(0);
+}
+
+/* BUTTON */
+.main-btn{
+  width:100%;
+  margin-top:18px;
+  padding:17px;
+  border:0;
+  border-radius:18px;
+  background:linear-gradient(90deg,#8d28ff,#e64dff);
+  color:white;
+  font-size:17px;
+  font-weight:bold;
+  cursor:pointer;
+  box-shadow:0 8px 25px rgba(155,40,255,.25);
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+  <header class="header">
+
+    <button class="menu" onclick="openMenu()">
+      ☰
+    </button>
+
+    <div class="logo">
+      <div class="logo-title">منچرز</div>
+      <div class="logo-sub">اتحادیه منچرز</div>
+    </div>
+
+    <div style="width:48px;"></div>
+
+  </header>
+
+  <section class="balance">
+
+    <div class="balance-main">
+
+      <div class="balance-title">
+        موجودی حساب
+      </div>
+
+      <div class="balance-row">
+
+        <div class="wallet">
+          💰
+        </div>
+
+        <div class="amount">
+          <div class="amount-number">
+            ۰ تومان
+          </div>
+
+          <div class="toman">
+            موجودی کیف پول
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="balance-actions">
+      <button onclick="toast('بخش افزایش موجودی به‌زودی فعال می‌شود')">
+        ➕ افزایش موجودی
+      </button>
+
+      <button onclick="toast('بخش برداشت به‌زودی فعال می‌شود')">
+        💸 برداشت
+      </button>
+    </div>
+
+  </section>
+
+  <button class="main-btn" onclick="openGames()">
+    🎮 ورود به بازی‌ها
+  </button>
+
+</div>
+
+
+<!-- MENU -->
+
+<div id="overlay" class="overlay" onclick="closeMenu(event)">
+
+  <div class="panel" onclick="event.stopPropagation()">
+
+    <div class="panel-head">
+
+      <h2>منوی اتحادیه</h2>
+
+      <button class="close" onclick="closeMenu()">
+        ×
+      </button>
+
+    </div>
+
+    <button class="menu-item" onclick="openGames()">
+      🎮 بازی‌ها
+    </button>
+
+    <button class="menu-item" onclick="showAccount()">
+      👤 حساب کاربری
+    </button>
+
+    <button class="menu-item" onclick="showSecurity()">
+      🔐 امنیت
+    </button>
+
+    <button class="menu-item" onclick="showAbout()">
+      ℹ️ درباره اتحادیه
+    </button>
+
+  </div>
+
+</div>
+
+
+<div id="toast" class="toast"></div>
+
+
+<script>
+
+const tg = window.Telegram?.WebApp;
+
+if(tg){
+  tg.ready();
+  tg.expand();
+}
+
+function openMenu(){
+  document.getElementById("overlay").classList.add("show");
+}
+
+function closeMenu(e){
+
+  if(!e || e.target.id === "overlay"){
     document.getElementById("overlay").classList.remove("show");
   }
+
 }
 
-function gameClick(i) {
-  toast(
-    "ورود به " +
-    games[i][1] +
-    " — لینک بازی هنوز تنظیم نشده"
-  );
+function toast(message){
+
+  const el = document.getElementById("toast");
+
+  el.textContent = message;
+
+  el.classList.add("show");
+
+  clearTimeout(window.toastTimer);
+
+  window.toastTimer = setTimeout(function(){
+
+    el.classList.remove("show");
+
+  },1800);
+
 }
 
-function setActive(el) {
-  document
-    .querySelectorAll(".nav-item")
-    .forEach(x => x.classList.remove("active"));
+function openGames(){
 
-  el.classList.add("active");
+  closeMenu();
+
+  toast("بخش بازی‌ها در حال آماده‌سازی است 🎮");
+
 }
+
+function showAccount(){
+
+  closeMenu();
+
+  toast("بخش حساب کاربری به‌زودی فعال می‌شود 👤");
+
+}
+
+function showSecurity(){
+
+  closeMenu();
+
+  toast("امنیت حساب فعال است 🔐");
+
+}
+
+function showAbout(){
+
+  closeMenu();
+
+  toast("اتحادیه منچرز 🎲");
+
+}
+
+</script>
+
+</body>
+</html><!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>اتحادیه منچرز</title>
+
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+  background:#070513;
+  color:#fff;
+  font-family:Tahoma,Arial,sans-serif;
+  min-height:100vh;
+}
+
+.app{
+  max-width:520px;
+  margin:auto;
+  padding:14px;
+}
+
+/* HEADER */
+.header{
+  height:125px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  border-bottom:1px solid rgba(170,70,255,.25);
+  margin-bottom:18px;
+}
+
+.menu{
+  width:48px;
+  height:48px;
+  border:1px solid #a63cff;
+  border-radius:15px;
+  background:#120b25;
+  color:#ed54ff;
+  font-size:27px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+}
+
+.logo{
+  text-align:center;
+}
+
+.logo-title{
+  font-size:34px;
+  font-weight:900;
+  color:#f37cff;
+  text-shadow:0 0 18px #b400ff;
+}
+
+.logo-sub{
+  color:#ef55ff;
+  font-size:14px;
+  font-weight:bold;
+  margin-top:5px;
+}
+
+/* BALANCE */
+.balance{
+  border:1px solid #8c35ff;
+  border-radius:25px;
+  background:linear-gradient(145deg,#0e0925,#0a0a1d);
+  box-shadow:0 0 25px rgba(135,35,255,.15);
+  overflow:hidden;
+}
+
+.balance-main{
+  padding:22px 20px;
+}
+
+.balance-title{
+  color:#bca7e8;
+  font-size:17px;
+  font-weight:bold;
+  margin-bottom:18px;
+}
+
+.balance-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+}
+
+.wallet{
+  width:68px;
+  height:68px;
+  border-radius:18px;
+  border:1px solid #a63cff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#15102b;
+  font-size:34px;
+}
+
+.amount{
+  flex:1;
+  text-align:center;
+}
+
+.amount-number{
+  font-size:27px;
+  font-weight:900;
+}
+
+.toman{
+  color:#f35cff;
+  font-size:13px;
+  margin-top:5px;
+}
+
+.balance-actions{
+  display:flex;
+  border-top:1px solid rgba(170,70,255,.25);
+}
+
+.balance-actions button{
+  flex:1;
+  padding:16px;
+  background:none;
+  border:0;
+  color:#fff;
+  font-size:15px;
+  cursor:pointer;
+}
+
+.balance-actions button+button{
+  border-right:1px solid rgba(170,70,255,.25);
+}
+
+/* MENU PANEL */
+.overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.7);
+  display:none;
+  align-items:flex-end;
+  z-index:999;
+}
+
+.overlay.show{
+  display:flex;
+}
+
+.panel{
+  width:100%;
+  max-width:520px;
+  margin:auto;
+  background:#100a20;
+  border:1px solid #8c35ff;
+  border-bottom:0;
+  border-radius:25px 25px 0 0;
+  padding:20px;
+  box-shadow:0 -10px 40px rgba(130,30,255,.3);
+}
+
+.panel-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:18px;
+}
+
+.panel-head h2{
+  color:#f37cff;
+  font-size:20px;
+}
+
+.close{
+  width:40px;
+  height:40px;
+  border-radius:12px;
+  border:1px solid #7130aa;
+  background:#1b102e;
+  color:white;
+  font-size:22px;
+  cursor:pointer;
+}
+
+.menu-item{
+  width:100%;
+  padding:17px;
+  margin-top:10px;
+  border-radius:16px;
+  border:1px solid rgba(170,70,255,.3);
+  background:#171027;
+  color:white;
+  text-align:right;
+  font-size:16px;
+  cursor:pointer;
+}
+
+.menu-item:hover{
+  border-color:#c04cff;
+}
+
+/* TOAST */
+.toast{
+  position:fixed;
+  left:50%;
+  bottom:25px;
+  transform:translateX(-50%) translateY(20px);
+  background:#24113d;
+  border:1px solid #a63cff;
+  padding:13px 18px;
+  border-radius:14px;
+  opacity:0;
+  pointer-events:none;
+  transition:.25s;
+  z-index:2000;
+  white-space:nowrap;
+}
+
+.toast.show{
+  opacity:1;
+  transform:translateX(-50%) translateY(0);
+}
+
+/* BUTTON */
+.main-btn{
+  width:100%;
+  margin-top:18px;
+  padding:17px;
+  border:0;
+  border-radius:18px;
+  background:linear-gradient(90deg,#8d28ff,#e64dff);
+  color:white;
+  font-size:17px;
+  font-weight:bold;
+  cursor:pointer;
+  box-shadow:0 8px 25px rgba(155,40,255,.25);
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+  <header class="header">
+
+    <button class="menu" onclick="openMenu()">
+      ☰
+    </button>
+
+    <div class="logo">
+      <div class="logo-title">منچرز</div>
+      <div class="logo-sub">اتحادیه منچرز</div>
+    </div>
+
+    <div style="width:48px;"></div>
+
+  </header>
+
+  <section class="balance">
+
+    <div class="balance-main">
+
+      <div class="balance-title">
+        موجودی حساب
+      </div>
+
+      <div class="balance-row">
+
+        <div class="wallet">
+          💰
+        </div>
+
+        <div class="amount">
+          <div class="amount-number">
+            ۰ تومان
+          </div>
+
+          <div class="toman">
+            موجودی کیف پول
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="balance-actions">
+      <button onclick="toast('بخش افزایش موجودی به‌زودی فعال می‌شود')">
+        ➕ افزایش موجودی
+      </button>
+
+      <button onclick="toast('بخش برداشت به‌زودی فعال می‌شود')">
+        💸 برداشت
+      </button>
+    </div>
+
+  </section>
+
+  <button class="main-btn" onclick="openGames()">
+    🎮 ورود به بازی‌ها
+  </button>
+
+</div>
+
+
+<!-- MENU -->
+
+<div id="overlay" class="overlay" onclick="closeMenu(event)">
+
+  <div class="panel" onclick="event.stopPropagation()">
+
+    <div class="panel-head">
+
+      <h2>منوی اتحادیه</h2>
+
+      <button class="close" onclick="closeMenu()">
+        ×
+      </button>
+
+    </div>
+
+    <button class="menu-item" onclick="openGames()">
+      🎮 بازی‌ها
+    </button>
+
+    <button class="menu-item" onclick="showAccount()">
+      👤 حساب کاربری
+    </button>
+
+    <button class="menu-item" onclick="showSecurity()">
+      🔐 امنیت
+    </button>
+
+    <button class="menu-item" onclick="showAbout()">
+      ℹ️ درباره اتحادیه
+    </button>
+
+  </div>
+
+</div>
+
+
+<div id="toast" class="toast"></div>
+
+
+<script>
+
+const tg = window.Telegram?.WebApp;
+
+if(tg){
+  tg.ready();
+  tg.expand();
+}
+
+function openMenu(){
+  document.getElementById("overlay").classList.add("show");
+}
+
+function closeMenu(e){
+
+  if(!e || e.target.id === "overlay"){
+    document.getElementById("overlay").classList.remove("show");
+  }
+
+}
+
+function toast(message){
+
+  const el = document.getElementById("toast");
+
+  el.textContent = message;
+
+  el.classList.add("show");
+
+  clearTimeout(window.toastTimer);
+
+  window.toastTimer = setTimeout(function(){
+
+    el.classList.remove("show");
+
+  },1800);
+
+}
+
+function openGames(){
+
+  closeMenu();
+
+  toast("بخش بازی‌ها در حال آماده‌سازی است 🎮");
+
+}
+
+function showAccount(){
+
+  closeMenu();
+
+  toast("بخش حساب کاربری به‌زودی فعال می‌شود 👤");
+
+}
+
+function showSecurity(){
+
+  closeMenu();
+
+  toast("امنیت حساب فعال است 🔐");
+
+}
+
+function showAbout(){
+
+  closeMenu();
+
+  toast("اتحادیه منچرز 🎲");
+
+}
+
+</script>
+
+</body>
+</html>
