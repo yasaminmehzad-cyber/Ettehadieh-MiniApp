@@ -1,117 +1,84 @@
-<!doctype html>
-<html lang="fa" dir="rtl">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>اتحادیه منچرز</title>
+const games = [
+  ["🎲", "منچز", "ورود به بازی"],
+  ["🟪", "مارکرفت", "ورود به بازی"],
+  ["🎲", "تخت نرد (پلاتو)", "ورود به بازی"],
+  ["🃏", "حکم (سوبرا)", "ورود به بازی"]
+];
 
-<style>
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
+function toast(msg) {
+  const el = document.getElementById("toast");
+  el.textContent = msg;
+  el.classList.add("show");
+
+  clearTimeout(window.__toast);
+  window.__toast = setTimeout(
+    () => el.classList.remove("show"),
+    1700
+  );
 }
 
-body{
-  background:#070513;
-  color:#fff;
-  font-family:Tahoma,Arial,sans-serif;
-  min-height:100vh;
+function openPanel(type) {
+  const overlay = document.getElementById("overlay");
+  const title = document.getElementById("sheet-title");
+  const content = document.getElementById("sheet-content");
+
+  if (type === "games") {
+    title.textContent = "بازی‌ها";
+
+    content.innerHTML = `
+      <div class="games">
+        ${games.map((g, i) => `
+          <button class="game" onclick="gameClick(${i})">
+            <div class="gicon">${g[0]}</div>
+            <strong>${g[1]}</strong>
+            <small>${g[2]}</small>
+          </button>
+        `).join("")}
+      </div>
+    `;
+
+  } else if (type === "security") {
+    title.textContent = "امنیت";
+
+    content.innerHTML = `
+      <div class="info">
+        امنیت حساب و ورود سریع در این بخش قرار می‌گیرد.<br>
+        اثر انگشت دستگاه بعد از اتصال Mini App
+        به محیط امن Telegram فعال می‌شود.
+      </div>
+    `;
+
+  } else {
+    title.textContent = "حساب";
+
+    content.innerHTML = `
+      <div class="info">
+        پروفایل، تنظیمات و اطلاعات حساب در این بخش قرار می‌گیرد.
+      </div>
+    `;
+  }
+
+  overlay.classList.add("show");
 }
 
-.app{
-  max-width:520px;
-  margin:auto;
-  padding:14px 14px 25px;
+function closePanel(e) {
+  if (!e || e.target.id === "overlay") {
+    document.getElementById("overlay").classList.remove("show");
+  }
 }
 
-/* HEADER */
-.header{
-  height:125px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  border-bottom:1px solid rgba(170,70,255,.25);
-  margin-bottom:18px;
+function gameClick(i) {
+  toast(
+    "ورود به " +
+    games[i][1] +
+    " — لینک بازی هنوز تنظیم نشده"
+  );
 }
 
-.menu{
-  font-size:34px;
-  color:#e94cff;
-  line-height:1;
-}
+function setActive(el) {
+  document
+    .querySelectorAll(".nav-item")
+    .forEach(x => x.classList.remove("active"));
 
-.logo{
-  text-align:center;
+  el.classList.add("active");
 }
-
-.logo-title{
-  font-family:cursive;
-  font-size:39px;
-  color:#f37cff;
-  text-shadow:0 0 18px #b400ff;
-}
-
-.logo-sub{
-  color:#ef55ff;
-  font-size:16px;
-  font-weight:bold;
-  margin-top:4px;
-}
-
-/* BALANCE */
-.balance{
-  border:1px solid #8c35ff;
-  border-radius:25px;
-  background:
-    radial-gradient(circle at 85% 20%,rgba(180,40,255,.2),transparent 30%),
-    linear-gradient(145deg,#0e0925,#0a0a1d);
-  box-shadow:0 0 25px rgba(135,35,255,.15);
-  overflow:hidden;
-}
-
-.balance-main{
-  padding:22px 20px;
-  min-height:190px;
-}
-
-.balance-title{
-  color:#bca7e8;
-  font-size:18px;
-  font-weight:bold;
-  margin-bottom:18px;
-}
-
-.balance-row{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:12px;
-}
-
-.wallet{
-  width:68px;
-  height:68px;
-  border-radius:18px;
-  border:1px solid #a63cff;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:#15102b;
-  font-size:35px;
-}
-
-.amount{
-  flex:1;
-  text-align:center;
-}
-
-.amount-number{
-  font-size:29px;
-  font-weight:900;
-  white-space:nowrap;
-}
-
-.toman{
-  color:#f35cff;
-  font-size:14px
