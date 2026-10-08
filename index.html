@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+
 <title>اتحادیه منچرز</title>
 
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
@@ -14,12 +15,16 @@
   padding:0;
 }
 
+html,body{
+  width:100%;
+  min-height:100%;
+}
+
 body{
   background:
     radial-gradient(circle at 50% 0%,#260044 0,#080016 38%,#03000b 100%);
   color:#fff;
   font-family:Tahoma,Arial,sans-serif;
-  min-height:100vh;
 }
 
 button{
@@ -27,11 +32,16 @@ button{
   cursor:pointer;
 }
 
+a{
+  text-decoration:none;
+  color:inherit;
+}
+
 .app{
   width:100%;
   max-width:520px;
   margin:auto;
-  padding-bottom:30px;
+  padding-bottom:25px;
 }
 
 /* HEADER */
@@ -213,7 +223,7 @@ button{
   min-height:58px;
 }
 
-.balance-stat+ .balance-stat{
+.balance-stat+.balance-stat{
   border-right:1px solid #7130aa;
 }
 
@@ -445,7 +455,7 @@ button{
   text-shadow:0 0 10px #ff00e6;
 }
 
-/* GAME CARDS */
+/* GAMES */
 
 .games{
   display:grid;
@@ -465,6 +475,11 @@ button{
   justify-content:center;
   color:#fff;
   box-shadow:0 0 18px #8b1fff18;
+  transition:.15s;
+}
+
+.game-card:active{
+  transform:scale(.96);
 }
 
 .game-card span{
@@ -565,6 +580,7 @@ button{
 }
 
 @media(max-width:390px){
+
   .game-info{
     grid-template-columns:1.1fr repeat(4,.8fr);
   }
@@ -576,6 +592,12 @@ button{
   .game-name{
     font-size:12px;
   }
+
+  .games{
+    padding-left:18px;
+    padding-right:18px;
+  }
+
 }
 </style>
 </head>
@@ -591,14 +613,33 @@ button{
   </div>
 
   <div class="logo">
-    <div class="logo-circle">ET</div>
-    <div class="logo-title">ETtehadie</div>
-    <div class="logo-sub">اتحادیه منچرز</div>
+
+    <div class="logo-circle">
+      ET
+    </div>
+
+    <div class="logo-title">
+      ETtehadie
+    </div>
+
+    <div class="logo-sub">
+      اتحادیه منچرز
+    </div>
+
   </div>
 
   <div class="head-right">
-    <button class="head-btn" onclick="toast('اعلان جدیدی ندارید')">♧</button>
-    <button class="head-btn" onclick="openMenu()">⋮</button>
+
+    <button class="head-btn"
+      onclick="toast('اعلان جدیدی ندارید')">
+      ♧
+    </button>
+
+    <button class="head-btn"
+      onclick="openMenu()">
+      ⋮
+    </button>
+
   </div>
 
 </header>
@@ -610,41 +651,70 @@ button{
 
   <div class="balance-top">
 
-    <div class="wallet">👛</div>
+    <div class="wallet">
+      👛
+    </div>
 
     <div class="balance-info">
 
-      <div class="balance-label">موجودی کل</div>
-
-      <div class="balance-number">
-        2,580,000 <span>تومان</span>
+      <div class="balance-label">
+        موجودی کل
       </div>
 
-      <button class="details" onclick="toast('جزئیات موجودی')">
+      <div class="balance-number">
+        2,580,000
+        <span>تومان</span>
+      </div>
+
+      <button class="details"
+        onclick="toast('جزئیات موجودی')">
         ◉ مشاهده جزئیات
       </button>
 
     </div>
 
-    <div class="coin">I</div>
+    <div class="coin">
+      I
+    </div>
 
   </div>
 
   <div class="balance-bottom">
 
     <div class="balance-stat">
-      <div class="stat-title">مبلغ رزرو شده</div>
-      <div class="stat-value pink">280,000</div>
+
+      <div class="stat-title">
+        مبلغ رزرو شده
+      </div>
+
+      <div class="stat-value pink">
+        280,000
+      </div>
+
     </div>
 
     <div class="balance-stat">
-      <div class="stat-title">مبلغ رزرو انتقال</div>
-      <div class="stat-value purple">320,000</div>
+
+      <div class="stat-title">
+        مبلغ رزرو انتقال
+      </div>
+
+      <div class="stat-value purple">
+        320,000
+      </div>
+
     </div>
 
     <div class="balance-stat">
-      <div class="stat-title">موجودی قابل برداشت</div>
-      <div class="stat-value green">1,980,000</div>
+
+      <div class="stat-title">
+        موجودی قابل برداشت
+      </div>
+
+      <div class="stat-value green">
+        1,980,000
+      </div>
+
     </div>
 
   </div>
@@ -657,16 +727,30 @@ button{
 <section class="section">
 
   <div class="section-head">
-    <div class="section-title">📊 آمار بازی‌های ۲۴ ساعت گذشته</div>
-    <button class="more" onclick="toast('فیلتر آمار')">منبع⌄</button>
+
+    <div class="section-title">
+      📊 آمار بازی‌های ۲۴ ساعت گذشته
+    </div>
+
+    <button class="more"
+      onclick="toast('فیلتر آمار')">
+      منبع⌄
+    </button>
+
   </div>
+
 
   <div class="game-row">
 
-    <div class="game-icon">🎲</div>
+    <div class="game-icon">
+      🎲
+    </div>
 
     <div class="game-info">
-      <div class="game-name">مارکرفت</div>
+
+      <div class="game-name">
+        مارکرفت
+      </div>
 
       <div>
         <small>تعداد بازی</small>
@@ -695,10 +779,15 @@ button{
 
   <div class="game-row">
 
-    <div class="game-icon">🎲</div>
+    <div class="game-icon">
+      🎲
+    </div>
 
     <div class="game-info">
-      <div class="game-name">ماینکرفت</div>
+
+      <div class="game-name">
+        ماینکرفت
+      </div>
 
       <div>
         <small>تعداد بازی</small>
@@ -739,12 +828,22 @@ button{
     </div>
 
     <div class="card">
-      <strong>کارت شماره ۱</strong>
-      <small>۱۴۰۵/۰۵/۱۴</small>
+
+      <strong>
+        کارت شماره ۱
+      </strong>
+
+      <small>
+        ۱۴۰۵/۰۵/۱۴
+      </small>
+
     </div>
 
-    <button class="card-button" onclick="toast('افزودن کارت جدید')">
+    <button class="card-button"
+      onclick="toast('افزودن کارت جدید')">
+
       ＋ افزودن کارت جدید
+
     </button>
 
   </div>
@@ -758,13 +857,27 @@ button{
     </div>
 
     <div class="card">
-      <strong>🎲 مارکرفت</strong>
-      <small class="green">زیان +320,000</small>
+
+      <strong>
+        🎲 مارکرفت
+      </strong>
+
+      <small class="green">
+        سود +320,000
+      </small>
+
     </div>
 
     <div class="card">
-      <strong>🎲 ماینکرفت</strong>
-      <small class="pink">زیان -150,000</small>
+
+      <strong>
+        🎲 ماینکرفت
+      </strong>
+
+      <small class="pink">
+        زیان -150,000
+      </small>
+
     </div>
 
   </div>
@@ -777,13 +890,27 @@ button{
 <div class="security">
 
   <div class="security-box">
-    <strong>🛡 سیستم امنیتی فعال است</strong>
-    <small>حفاظت چندلایه، رمزگذاری پیشرفته، نظارت ۲۴ ساعته</small>
+
+    <strong>
+      🛡 سیستم امنیتی فعال است
+    </strong>
+
+    <small>
+      حفاظت چندلایه، رمزگذاری پیشرفته، نظارت ۲۴ ساعته
+    </small>
+
   </div>
 
   <div class="security-box purple">
-    <strong>◉ ورود امن</strong>
-    <small>با اثر انگشت یا PIN وارد شوید</small>
+
+    <strong>
+      ◉ ورود امن
+    </strong>
+
+    <small>
+      با اثر انگشت یا PIN وارد شوید
+    </small>
+
   </div>
 
 </div>
@@ -793,29 +920,63 @@ button{
 
 <nav class="bottom-nav">
 
-  <button class="nav-item active" onclick="nav('خانه')">
-    <span class="nav-icon">⌂</span>
+  <button class="nav-item active"
+    onclick="nav(this,'خانه')">
+
+    <span class="nav-icon">
+      ⌂
+    </span>
+
     خانه
+
   </button>
 
-  <button class="nav-item" onclick="nav('بازی‌ها')">
-    <span class="nav-icon">🎮</span>
+
+  <button class="nav-item"
+    onclick="nav(this,'بازی‌ها')">
+
+    <span class="nav-icon">
+      🎮
+    </span>
+
     بازی‌ها
+
   </button>
 
-  <button class="nav-item" onclick="nav('ماینیز')">
-    <span class="nav-icon">ϟ</span>
+
+  <button class="nav-item"
+    onclick="nav(this,'ماینیز')">
+
+    <span class="nav-icon">
+      ϟ
+    </span>
+
     ماینیز
+
   </button>
 
-  <button class="nav-item" onclick="nav('مالی')">
-    <span class="nav-icon">👛</span>
+
+  <button class="nav-item"
+    onclick="nav(this,'مالی')">
+
+    <span class="nav-icon">
+      👛
+    </span>
+
     مالی
+
   </button>
 
-  <button class="nav-item" onclick="nav('حساب')">
-    <span class="nav-icon">●</span>
+
+  <button class="nav-item"
+    onclick="nav(this,'حساب')">
+
+    <span class="nav-icon">
+      ●
+    </span>
+
     حساب
+
   </button>
 
 </nav>
@@ -825,25 +986,61 @@ button{
 
 <div class="games">
 
-  <button class="game-card" onclick="game('منچرز')">
-    <span>🎲 منچرز</span>
-    <small>Google Play</small>
-  </button>
+  <!-- PLATO -->
 
-  <button class="game-card" onclick="game('پلاتو')">
-    <span>🎯 پلاتو — تخته نرد</span>
-    <small>Plato</small>
-  </button>
+  <a
+    class="game-card"
+    href="https://play.google.com/store/apps/details?id=com.plato.android.mena"
+    target="_blank"
+    rel="noopener">
 
-  <button class="game-card" onclick="game('مارکرفت')">
-    <span>⛏ مارکرفت</span>
-    <small>کافه‌بازار</small>
-  </button>
+    <span>
+      🎯 پلاتو
+    </span>
 
-  <button class="game-card" onclick="game('سوبرا')">
-    <span>🃏 سوبرا — حکم</span>
-    <small>سایت رسمی</small>
-  </button>
+    <small>
+      Google Play
+    </small>
+
+  </a>
+
+
+  <!-- BACKGAMMON -->
+
+  <a
+    class="game-card"
+    href="https://play.google.com/store/apps/details?id=io.coolplay.backgammon"
+    target="_blank"
+    rel="noopener">
+
+    <span>
+      🎲 تخته نرد
+    </span>
+
+    <small>
+      Google Play
+    </small>
+
+  </a>
+
+
+  <!-- LUDO -->
+
+  <a
+    class="game-card"
+    href="https://play.google.com/store/apps/details?id=com.cleverlife.ludo"
+    target="_blank"
+    rel="noopener">
+
+    <span>
+      🟠 لودو
+    </span>
+
+    <small>
+      Google Play
+    </small>
+
+  </a>
 
 </div>
 
@@ -852,35 +1049,53 @@ button{
 
 <!-- MENU -->
 
-<div id="overlay" class="overlay" onclick="closeMenu(event)">
+<div id="overlay"
+     class="overlay"
+     onclick="closeMenu(event)">
 
-  <div class="panel" onclick="event.stopPropagation()">
+  <div class="panel"
+       onclick="event.stopPropagation()">
 
     <div class="panel-head">
 
-      <div class="panel-title">منوی اتحادیه</div>
+      <div class="panel-title">
+        منوی اتحادیه
+      </div>
 
-      <button class="close" onclick="closeMenu()">×</button>
+      <button class="close"
+        onclick="closeMenu()">
+        ×
+      </button>
 
     </div>
 
-    <button class="menu-option" onclick="menuAction('بازی‌ها')">
+
+    <button class="menu-option"
+      onclick="menuAction('بازی‌ها')">
       🎮 بازی‌ها
     </button>
 
-    <button class="menu-option" onclick="menuAction('حساب کاربری')">
+
+    <button class="menu-option"
+      onclick="menuAction('حساب کاربری')">
       👤 حساب کاربری
     </button>
 
-    <button class="menu-option" onclick="menuAction('امنیت')">
+
+    <button class="menu-option"
+      onclick="menuAction('امنیت')">
       🔐 امنیت
     </button>
 
-    <button class="menu-option" onclick="menuAction('تنظیمات')">
+
+    <button class="menu-option"
+      onclick="menuAction('تنظیمات')">
       ⚙️ تنظیمات
     </button>
 
-    <button class="menu-option" onclick="menuAction('درباره اتحادیه')">
+
+    <button class="menu-option"
+      onclick="menuAction('درباره اتحادیه')">
       ℹ️ درباره اتحادیه
     </button>
 
@@ -897,58 +1112,91 @@ button{
 const tg = window.Telegram?.WebApp;
 
 if(tg){
+
   tg.ready();
+
   tg.expand();
+
 }
 
+
+/* MENU */
+
 function openMenu(){
-  document.getElementById("overlay").classList.add("show");
+
+  document
+    .getElementById("overlay")
+    .classList.add("show");
+
 }
+
 
 function closeMenu(e){
 
   if(!e || e.target.id === "overlay"){
-    document.getElementById("overlay").classList.remove("show");
+
+    document
+      .getElementById("overlay")
+      .classList.remove("show");
+
   }
 
 }
 
+
+/* TOAST */
+
 function toast(message){
 
-  const el=document.getElementById("toast");
+  const el =
+    document.getElementById("toast");
 
-  el.textContent=message;
+  el.textContent = message;
+
   el.classList.add("show");
 
   clearTimeout(window.__toast);
 
-  window.__toast=setTimeout(()=>{
-    el.classList.remove("show");
-  },1800);
+  window.__toast =
+    setTimeout(()=>{
+
+      el.classList.remove("show");
+
+    },1800);
+
 }
+
+
+/* MENU ACTION */
 
 function menuAction(name){
 
   closeMenu();
-  toast(name+" — به‌زودی فعال می‌شود");
+
+  toast(
+    name + " — به‌زودی فعال می‌شود"
+  );
+
 }
 
-function game(name){
 
-  toast("ورود به "+name+" — لینک بازی هنوز تنظیم نشده");
-}
+/* NAV */
 
-function nav(name){
+function nav(button,name){
 
-  document.querySelectorAll(".nav-item")
-    .forEach(x=>x.classList.remove("active"));
+  document
+    .querySelectorAll(".nav-item")
+    .forEach(x =>
+      x.classList.remove("active")
+    );
 
-  event.currentTarget.classList.add("active");
+  button.classList.add("active");
 
-  toast("بخش "+name);
+  toast("بخش " + name);
+
 }
 
 </script>
 
 </body>
-  </html>
+        </html>
