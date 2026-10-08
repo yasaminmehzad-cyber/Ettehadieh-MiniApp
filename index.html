@@ -1,729 +1,278 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<meta name="theme-color" content="#08051b">
-<title>اتحادیه منچرز</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>اتحادیه منچرز</title>
 
-<style>
-*{box-sizing:border-box}
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
 
-:root{
-  --bg:#07041a;
-  --card:#0d0826;
-  --card2:#110b30;
-  --line:#6334a2;
-  --purple:#b75be8;
-  --pink:#d85cd4;
-  --text:#f4f0ff;
-  --muted:#8f88a9;
-  --green:#54d6a5;
-}
+  <style>
+    * {
+      box-sizing: border-box;
+    }
 
-html,body{
-  margin:0;
-  min-height:100%;
-  background:var(--bg);
-  color:var(--text);
-  font-family:Tahoma,"Segoe UI",sans-serif;
-}
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Tahoma, Arial, sans-serif;
+      background: linear-gradient(180deg, #09050f, #160b24);
+      color: white;
+    }
 
-body{
-  overflow-x:hidden;
-}
+    .container {
+      max-width: 520px;
+      margin: auto;
+      padding: 22px 16px 40px;
+    }
 
-button,a{
-  font:inherit;
-  color:inherit;
-}
+    .logo {
+      width: 95px;
+      height: 95px;
+      margin: 10px auto 15px;
+      border-radius: 50%;
+      border: 2px solid #9b5cff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #120a1d;
+      box-shadow: 0 0 30px rgba(155,92,255,.25);
+      text-align: center;
+      font-size: 14px;
+      font-weight: bold;
+    }
 
-a{
-  text-decoration:none;
-}
+    h1 {
+      text-align: center;
+      margin: 8px 0 5px;
+      font-size: 25px;
+    }
 
-.app{
-  width:min(100%,720px);
-  margin:auto;
-  min-height:100vh;
-  padding:22px 16px 45px;
-  background:
-    radial-gradient(ellipse at 50% 5%,rgba(110,35,180,.22),transparent 42%),
-    linear-gradient(180deg,#09041e 0%,#070419 100%);
-}
+    .subtitle {
+      text-align: center;
+      color: #aaa;
+      font-size: 13px;
+      margin-bottom: 25px;
+    }
 
-/* HEADER */
+    .card {
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 18px;
+      padding: 18px;
+      margin-bottom: 14px;
+    }
 
-.topbar{
-  min-height:82px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:12px;
-}
+    .card h2 {
+      margin: 0 0 8px;
+      font-size: 18px;
+    }
 
-.brand{
-  display:flex;
-  align-items:center;
-  gap:11px;
-}
+    .card p {
+      margin: 0;
+      color: #bbb;
+      line-height: 1.8;
+      font-size: 13px;
+    }
 
-.logo{
-  width:50px;
-  height:50px;
-  border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:
-    radial-gradient(circle,#d88cff 0%,#8d38c8 55%,#351060 100%);
-  box-shadow:
-    0 0 25px rgba(183,91,232,.35),
-    inset 0 0 15px rgba(255,255,255,.15);
-  border:1px solid rgba(255,255,255,.18);
-  font-size:25px;
-}
+    .btn {
+      width: 100%;
+      border: 0;
+      border-radius: 14px;
+      padding: 14px;
+      margin-top: 12px;
+      color: white;
+      background: linear-gradient(135deg, #7b2cff, #a75cff);
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+    }
 
-.brand-text h1{
-  margin:0;
-  font-size:18px;
-  font-weight:900;
-}
+    .btn:active {
+      transform: scale(.98);
+    }
 
-.brand-text span{
-  display:block;
-  margin-top:4px;
-  color:var(--muted);
-  font-size:11px;
-}
+    .footer {
+      text-align: center;
+      color: #777;
+      font-size: 11px;
+      margin-top: 25px;
+    }
 
-.header-btn{
-  width:43px;
-  height:43px;
-  border-radius:14px;
-  border:1px solid rgba(183,91,232,.28);
-  background:rgba(255,255,255,.035);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:20px;
-}
+    #gamesPage {
+      display: none;
+    }
 
-/* HERO */
+    .back {
+      background: #251235;
+    }
 
-.hero{
-  margin-top:10px;
-  padding:24px 20px;
-  border:1px solid rgba(183,91,232,.23);
-  border-radius:24px;
-  background:
-    radial-gradient(circle at 80% 10%,rgba(216,92,212,.13),transparent 35%),
-    linear-gradient(145deg,rgba(20,10,48,.96),rgba(8,5,26,.96));
-  box-shadow:0 18px 50px rgba(0,0,0,.22);
-}
+    .game {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      background: rgba(255,255,255,.06);
+      border-radius: 16px;
+      padding: 14px;
+      margin-bottom: 10px;
+    }
 
-.hero small{
-  color:#b995d3;
-  font-size:12px;
-}
+    .game-info {
+      flex: 1;
+    }
 
-.hero h2{
-  margin:8px 0 7px;
-  font-size:26px;
-  line-height:1.4;
-}
+    .game-title {
+      font-size: 15px;
+      font-weight: bold;
+    }
 
-.hero p{
-  margin:0;
-  color:var(--muted);
-  line-height:1.9;
-  font-size:13px;
-}
+    .game-desc {
+      color: #999;
+      font-size: 11px;
+      margin-top: 5px;
+    }
 
-/* SECTION */
-
-.section-title{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  margin:24px 3px 12px;
-}
-
-.section-title h3{
-  margin:0;
-  font-size:17px;
-}
-
-.section-title span{
-  color:var(--muted);
-  font-size:11px;
-}
-
-/* NEW TRACK */
-
-.track-card{
-  position:relative;
-  overflow:hidden;
-  padding:17px;
-  border-radius:20px;
-  border:1px solid rgba(183,91,232,.25);
-  background:
-    linear-gradient(135deg,#160b35,#0b0622);
-  box-shadow:0 12px 30px rgba(0,0,0,.2);
-}
-
-.track-card:after{
-  content:"";
-  position:absolute;
-  width:150px;
-  height:150px;
-  border-radius:50%;
-  background:rgba(183,91,232,.13);
-  left:-60px;
-  top:-70px;
-  filter:blur(5px);
-}
-
-.track-row{
-  position:relative;
-  z-index:1;
-  display:flex;
-  align-items:center;
-  gap:13px;
-}
-
-.track-cover{
-  width:62px;
-  height:62px;
-  flex:none;
-  border-radius:17px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:27px;
-  background:linear-gradient(145deg,#b75be8,#57218c);
-  box-shadow:0 7px 20px rgba(183,91,232,.28);
-}
-
-.track-info{
-  flex:1;
-  min-width:0;
-}
-
-.track-info strong{
-  display:block;
-  font-size:15px;
-}
-
-.track-info span{
-  display:block;
-  margin-top:6px;
-  color:var(--muted);
-  font-size:11px;
-}
-
-.play-btn{
-  width:44px;
-  height:44px;
-  border:0;
-  border-radius:50%;
-  background:linear-gradient(145deg,var(--purple),var(--pink));
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  box-shadow:0 6px 20px rgba(183,91,232,.3);
-}
-
-/* MAIN BUTTONS */
-
-.menu-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:12px;
-}
-
-.menu-card{
-  min-height:125px;
-  padding:18px;
-  border-radius:20px;
-  border:1px solid rgba(183,91,232,.22);
-  background:linear-gradient(145deg,#10082a,#09051f);
-  display:flex;
-  flex-direction:column;
-  justify-content:space-between;
-  transition:.15s;
-}
-
-.menu-card:active{
-  transform:scale(.97);
-}
-
-.menu-icon{
-  width:44px;
-  height:44px;
-  border-radius:14px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:rgba(183,91,232,.13);
-  font-size:23px;
-}
-
-.menu-card strong{
-  font-size:14px;
-}
-
-.menu-card span{
-  margin-top:4px;
-  color:var(--muted);
-  font-size:10px;
-}
-
-/* GAMES PAGE */
-
-.page{
-  display:none;
-}
-
-.page.active{
-  display:block;
-}
-
-.back-btn{
-  display:flex;
-  align-items:center;
-  gap:7px;
-  border:0;
-  background:transparent;
-  color:#cda9e9;
-  padding:8px 0;
-  margin-bottom:12px;
-}
-
-.games-head{
-  padding:19px;
-  border-radius:22px;
-  border:1px solid rgba(183,91,232,.23);
-  background:linear-gradient(145deg,#160b35,#09051f);
-  margin-bottom:15px;
-}
-
-.games-head h2{
-  margin:0;
-  font-size:22px;
-}
-
-.games-head p{
-  margin:7px 0 0;
-  color:var(--muted);
-  font-size:12px;
-  line-height:1.8;
-}
-
-.games-list{
-  display:flex;
-  flex-direction:column;
-  gap:12px;
-}
-
-.game-card{
-  display:flex;
-  align-items:center;
-  gap:13px;
-  padding:14px;
-  border-radius:20px;
-  border:1px solid rgba(183,91,232,.22);
-  background:linear-gradient(145deg,#11092c,#09051f);
-}
-
-.game-icon{
-  width:60px;
-  height:60px;
-  flex:none;
-  border-radius:17px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:29px;
-  background:linear-gradient(145deg,#2a1552,#10082a);
-  border:1px solid rgba(183,91,232,.22);
-}
-
-.game-info{
-  flex:1;
-  min-width:0;
-}
-
-.game-info strong{
-  display:block;
-  font-size:15px;
-}
-
-.game-info span{
-  display:block;
-  margin-top:5px;
-  color:var(--muted);
-  font-size:10px;
-  line-height:1.6;
-}
-
-.game-open{
-  flex:none;
-  padding:10px 13px;
-  border-radius:12px;
-  background:linear-gradient(145deg,var(--purple),var(--pink));
-  font-size:11px;
-  font-weight:bold;
-}
-
-/* FOOTER */
-
-.footer{
-  text-align:center;
-  color:#5f5876;
-  font-size:10px;
-  margin-top:35px;
-  line-height:2;
-}
-
-/* MOBILE */
-
-@media(max-width:420px){
-  .app{
-    padding-left:13px;
-    padding-right:13px;
-  }
-
-  .hero h2{
-    font-size:23px;
-  }
-
-  .game-open{
-    padding:9px 10px;
-  }
-
-  .game-icon{
-    width:54px;
-    height:54px;
-  }
-}
-</style>
+    .game a {
+      text-decoration: none;
+      color: white;
+      background: #7b2cff;
+      padding: 9px 12px;
+      border-radius: 10px;
+      font-size: 12px;
+      white-space: nowrap;
+    }
+  </style>
 </head>
 
 <body>
 
-<div class="app">
+<div class="container">
 
-  <!-- HOME PAGE -->
-  <main id="homePage" class="page active">
+  <!-- صفحه اصلی -->
+  <section id="homePage">
 
-    <header class="topbar">
+    <div class="logo">
+      اتحادیه<br>منچرز
+    </div>
 
-      <div class="brand">
-        <div class="logo">♟</div>
+    <h1>اتحادیه منچرز</h1>
 
-        <div class="brand-text">
-          <h1>اتحادیه منچرز</h1>
-          <span>جامعه بازی و سرگرمی</span>
-        </div>
-      </div>
+    <div class="subtitle">
+      مرجع رسمی سرگرمی و موزیک
+    </div>
 
-      <button class="header-btn" onclick="openGames()" aria-label="بازی‌ها">
-        🎮
-      </button>
-
-    </header>
-
-
-    <section class="hero">
-
-      <small>خوش اومدی 👋</small>
-
-      <h2>
-        دنیای بازی و سرگرمی
-      </h2>
-
+    <div class="card">
+      <h2>🎵 ترک جدیدمون</h2>
       <p>
-        بازی مورد علاقه‌ات رو انتخاب کن و مستقیم وارد صفحه دانلودش در گوگل‌پلی شو.
+        جدیدترین ترک‌ها و موزیک‌های منتخب اتحادیه منچرز
       </p>
 
-    </section>
-
-
-    <!-- NEW TRACK -->
-
-    <div class="section-title">
-      <h3>🎵 ترک جدیدمون</h3>
-      <span>جدید</span>
+      <button class="btn" onclick="openMusic()">
+        🎧 گوش دادن به موزیک
+      </button>
     </div>
 
-    <section class="track-card">
+    <div class="card">
+      <h2>🎮 بازی‌ها</h2>
+      <p>
+        بازی‌های محبوب و سرگرم‌کننده برای دورهمی
+      </p>
 
-      <div class="track-row">
-
-        <div class="track-cover">
-          🎵
-        </div>
-
-        <div class="track-info">
-          <strong>ترک جدیدمون</strong>
-          <span>به‌زودی منتشر می‌شود</span>
-        </div>
-
-        <button class="play-btn" onclick="newTrack()">
-          ▶
-        </button>
-
-      </div>
-
-    </section>
-
-
-    <!-- MAIN MENU -->
-
-    <div class="section-title">
-      <h3>دسترسی سریع</h3>
-      <span>اتحادیه منچرز</span>
+      <button class="btn" onclick="showGames()">
+        ورود به بخش بازی‌ها
+      </button>
     </div>
 
-    <section class="menu-grid">
+    <div class="footer">
+      © اتحادیه منچرز
+    </div>
 
-      <!-- ONLY GAMES BUTTON -->
-      <button class="menu-card" onclick="openGames()">
-
-        <div class="menu-icon">
-          🎮
-        </div>
-
-        <div>
-          <strong>بازی‌ها</strong>
-          <span>ورود به صفحه بازی‌ها</span>
-        </div>
-
-      </button>
+  </section>
 
 
-      <button class="menu-card" onclick="newTrack()">
+  <!-- صفحه بازی‌ها -->
+  <section id="gamesPage">
 
-        <div class="menu-icon">
-          🎵
-        </div>
-
-        <div>
-          <strong>ترک جدیدمون</strong>
-          <span>آخرین موزیک‌ها</span>
-        </div>
-
-      </button>
-
-    </section>
-
-
-    <footer class="footer">
-      اتحادیه منچرز
-      <br>
-      بازی • سرگرمی • موزیک
-    </footer>
-
-  </main>
-
-
-
-  <!-- GAMES PAGE -->
-  <main id="gamesPage" class="page">
-
-    <button class="back-btn" onclick="goHome()">
-      → برگشت به صفحه اصلی
+    <button class="btn back" onclick="showHome()">
+      ← برگشت
     </button>
 
+    <div class="logo">
+      🎮
+    </div>
 
-    <section class="games-head">
+    <h1>بازی‌ها</h1>
 
-      <h2>🎮 بازی‌ها</h2>
+    <div class="subtitle">
+      بازی مورد علاقه‌ات رو انتخاب کن
+    </div>
 
-      <p>
-        بازی مورد نظرت رو انتخاب کن؛ با زدن دکمه «دانلود»،
-        صفحه رسمی بازی در Google Play باز می‌شود.
-      </p>
-
-    </section>
-
-
-    <section class="games-list">
-
-
-      <!-- PLATO -->
-
-      <div class="game-card">
-
-        <div class="game-icon">
-          🎲
-        </div>
-
-        <div class="game-info">
-          <strong>Plato</strong>
-          <span>
-            بیش از ۳۰ بازی گروهی و چندنفره
-          </span>
-        </div>
-
-        <a
-          class="game-open"
-          href="https://play.google.com/store/apps/details?id=com.plato.android.mena"
-          target="_blank"
-          rel="noopener">
-          دانلود
-        </a>
-
+    <div class="game">
+      <div class="game-info">
+        <div class="game-title">🎲 Plato</div>
+        <div class="game-desc">بازی‌های گروهی و آنلاین</div>
       </div>
+      <a href="https://play.google.com/store/apps/details?id=com.plato.android.mena">
+        دانلود
+      </a>
+    </div>
 
-
-      <!-- LUDO KING -->
-
-      <div class="game-card">
-
-        <div class="game-icon">
-          🟢
-        </div>
-
-        <div class="game-info">
-          <strong>Ludo King</strong>
-          <span>
-            بازی منچ چندنفره آنلاین و آفلاین
-          </span>
-        </div>
-
-        <a
-          class="game-open"
-          href="https://play.google.com/store/apps/details?id=com.ludo.king"
-          target="_blank"
-          rel="noopener">
-          دانلود
-        </a>
-
+    <div class="game">
+      <div class="game-info">
+        <div class="game-title">🎯 Ludo King</div>
+        <div class="game-desc">بازی منچ آنلاین</div>
       </div>
+      <a href="https://play.google.com/store/apps/details?id=com.ludo.king">
+        دانلود
+      </a>
+    </div>
 
-
-      <!-- CHESS -->
-
-      <div class="game-card">
-
-        <div class="game-icon">
-          ♟️
-        </div>
-
-        <div class="game-info">
-          <strong>Chess.com</strong>
-          <span>
-            شطرنج آنلاین و تمرینی
-          </span>
-        </div>
-
-        <a
-          class="game-open"
-          href="https://play.google.com/store/apps/details?id=com.chess"
-          target="_blank"
-          rel="noopener">
-          دانلود
-        </a>
-
+    <div class="game">
+      <div class="game-info">
+        <div class="game-title">♟ Chess</div>
+        <div class="game-desc">شطرنج آنلاین</div>
       </div>
+      <a href="https://play.google.com/store/apps/details?id=com.chess">
+        دانلود
+      </a>
+    </div>
 
-
-      <!-- BACKGAMMON -->
-
-      <div class="game-card">
-
-        <div class="game-icon">
-          🎲
-        </div>
-
-        <div class="game-info">
-          <strong>Backgammon</strong>
-          <span>
-            تخته نرد کلاسیک
-          </span>
-        </div>
-
-        <a
-          class="game-open"
-          href="https://play.google.com/store/apps/details?id=com.cc.backgammon"
-          target="_blank"
-          rel="noopener">
-          دانلود
-        </a>
-
+    <div class="game">
+      <div class="game-info">
+        <div class="game-title">🎲 تخته نرد</div>
+        <div class="game-desc">بازی تخته نرد آنلاین</div>
       </div>
+      <a href="https://play.google.com/store/apps/details?id=com.cc.backgammon">
+        دانلود
+      </a>
+    </div>
 
-
-    </section>
-
-
-    <footer class="footer">
-      اتحادیه منچرز
-      <br>
-      بازی‌ها از Google Play
-    </footer>
-
-  </main>
+  </section>
 
 </div>
 
-
 <script>
+  function showGames() {
+    document.getElementById("homePage").style.display = "none";
+    document.getElementById("gamesPage").style.display = "block";
+    window.scrollTo(0, 0);
+  }
 
-function openGames(){
+  function showHome() {
+    document.getElementById("gamesPage").style.display = "none";
+    document.getElementById("homePage").style.display = "block";
+    window.scrollTo(0, 0);
+  }
 
-  document.getElementById("homePage").classList.remove("active");
+  function openMusic() {
+    alert("بخش موزیک به‌زودی فعال می‌شود 🎵");
+  }
 
-  document.getElementById("gamesPage").classList.add("active");
-
-  window.scrollTo({
-    top:0,
-    behavior:"smooth"
-  });
-
-}
-
-
-function goHome(){
-
-  document.getElementById("gamesPage").classList.remove("active");
-
-  document.getElementById("homePage").classList.add("active");
-
-  window.scrollTo({
-    top:0,
-    behavior:"smooth"
-  });
-
-}
-
-
-function newTrack(){
-
-  alert("🎵 ترک جدیدمون به‌زودی منتشر میشه ❤️");
-
-}
-
-
-/* Telegram Mini App */
-
-if(
-  window.Telegram &&
-  window.Telegram.WebApp
-){
-
-  try{
-
-    window.Telegram.WebApp.ready();
-
-    window.Telegram.WebApp.expand();
-
-  }catch(e){}
-
-}
-
+  if (window.Telegram && window.Telegram.WebApp) {
+    Telegram.WebApp.ready();
+    Telegram.WebApp.expand();
+  }
 </script>
 
 </body>
