@@ -1,1139 +1,962 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fa" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-
-<title>اتحادیه منچرز</title>
-
-<script src="https://telegram.org/js/telegram-web-app.js"></script>
-
-<style>
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-}
-
-html,body{
-  width:100%;
-  min-height:100%;
-}
-
-body{
-  background:
-    radial-gradient(circle at 50% 0%,#260044 0,#080016 38%,#03000b 100%);
-  color:#fff;
-  font-family:Tahoma,Arial,sans-serif;
-}
-
-button{
-  font-family:inherit;
-  cursor:pointer;
-}
-
-a{
-  text-decoration:none;
-  color:inherit;
-}
-
-.app{
-  width:100%;
-  max-width:520px;
-  margin:auto;
-  padding-bottom:25px;
-}
-
-/* HEADER */
-
-.header{
-  height:125px;
-  position:relative;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:8px 18px 0;
-  overflow:hidden;
-}
-
-.header:before{
-  content:"";
-  position:absolute;
-  left:0;
-  right:0;
-  top:0;
-  height:120px;
-  background:
-    radial-gradient(circle,#a900ff55 0,transparent 55%);
-  pointer-events:none;
-}
-
-.menu-btn,
-.head-btn{
-  position:relative;
-  z-index:2;
-  width:44px;
-  height:44px;
-  border:0;
-  background:transparent;
-  color:#f05aff;
-  font-size:29px;
-}
-
-.head-left,
-.head-right{
-  display:flex;
-  align-items:center;
-  gap:5px;
-}
-
-.logo{
-  position:absolute;
-  left:50%;
-  top:4px;
-  transform:translateX(-50%);
-  width:190px;
-  height:115px;
-  text-align:center;
-  z-index:1;
-}
-
-.logo-circle{
-  width:75px;
-  height:75px;
-  margin:auto;
-  border:3px solid #e6a929;
-  border-radius:50%;
-  background:
-    radial-gradient(circle,#ffd65c 0,#8e4700 42%,#16080b 70%);
-  box-shadow:0 0 20px #ffae00aa;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:#ffe58a;
-  font-size:27px;
-  font-weight:900;
-}
-
-.logo-title{
-  color:#ff55ff;
-  font-size:21px;
-  font-weight:900;
-  text-shadow:0 0 12px #d000ff;
-  margin-top:-2px;
-}
-
-.logo-sub{
-  color:#ff65ff;
-  font-size:13px;
-  font-weight:bold;
-}
-
-/* BALANCE */
-
-.balance{
-  margin:0 20px 12px;
-  border:1px solid #9f32ff;
-  border-radius:19px;
-  overflow:hidden;
-  background:
-    linear-gradient(135deg,#171044,#0b092b);
-  box-shadow:
-    0 0 18px #8d20ff33,
-    inset 0 0 30px #b000ff0d;
-}
-
-.balance-top{
-  min-height:130px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:13px;
-  background:
-    radial-gradient(circle at 85% 50%,#e000ff30,transparent 42%);
-}
-
-.wallet{
-  width:70px;
-  height:70px;
-  border:1px solid #d144ff;
-  border-radius:16px;
-  background:linear-gradient(145deg,#8d16c9,#24104d);
-  box-shadow:0 0 15px #c000ff55;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:36px;
-}
-
-.balance-info{
-  flex:1;
-  padding:0 10px;
-}
-
-.balance-label{
-  color:#fff;
-  font-size:15px;
-  font-weight:bold;
-}
-
-.balance-number{
-  font-size:28px;
-  font-weight:900;
-  margin-top:6px;
-}
-
-.balance-number span{
-  color:#ff55ff;
-  font-size:14px;
-}
-
-.details{
-  margin-top:8px;
-  padding:5px 12px;
-  border:1px solid #a632ff;
-  border-radius:20px;
-  background:#210a3b;
-  color:#ff6cff;
-  font-size:11px;
-}
-
-.coin{
-  width:85px;
-  height:85px;
-  border-radius:50%;
-  border:3px solid #e5a72e;
-  background:radial-gradient(circle,#ffda55,#9b4d00 55%,#210a05);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:31px;
-  box-shadow:0 0 18px #ffb00055;
-}
-
-.balance-bottom{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  border-top:1px solid #7130aa;
-}
-
-.balance-stat{
-  text-align:center;
-  padding:11px 5px;
-  min-height:58px;
-}
-
-.balance-stat+.balance-stat{
-  border-right:1px solid #7130aa;
-}
-
-.stat-title{
-  color:#d2b9ee;
-  font-size:10px;
-}
-
-.stat-value{
-  font-size:16px;
-  font-weight:bold;
-  margin-top:5px;
-}
-
-.green{color:#00e5ad}
-.pink{color:#ff35a9}
-.purple{color:#b76cff}
-
-/* SECTION */
-
-.section{
-  margin:12px 20px;
-  border:1px solid #8231d0;
-  border-radius:18px;
-  background:#0d0a2c;
-  padding:12px;
-  box-shadow:0 0 18px #8c20ff1c;
-}
-
-.section-head{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:10px;
-}
-
-.section-title{
-  color:#f45cff;
-  font-size:16px;
-  font-weight:900;
-}
-
-.more{
-  border:1px solid #9138e8;
-  border-radius:18px;
-  background:#160d35;
-  color:#d99cff;
-  padding:7px 12px;
-  font-size:10px;
-}
-
-/* GAME STATS */
-
-.game-row{
-  display:grid;
-  grid-template-columns:65px 1fr;
-  align-items:center;
-  gap:8px;
-  padding:9px;
-  margin-top:8px;
-  border:1px solid #56229a;
-  border-radius:17px;
-  background:linear-gradient(90deg,#1a0b4b,#090a2c);
-}
-
-.game-icon{
-  width:58px;
-  height:58px;
-  border-radius:15px;
-  background:linear-gradient(145deg,#a626df,#29105e);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:32px;
-  box-shadow:0 0 13px #b000ff55;
-}
-
-.game-info{
-  display:grid;
-  grid-template-columns:1.2fr repeat(4,1fr);
-  align-items:center;
-  text-align:center;
-}
-
-.game-name{
-  text-align:right;
-  font-weight:bold;
-  font-size:14px;
-}
-
-.game-info small{
-  color:#a993c6;
-  font-size:8px;
-  display:block;
-  margin-bottom:3px;
-}
-
-.game-info b{
-  font-size:12px;
-}
-
-/* TWO BOXES */
-
-.two{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px;
-  margin:12px 20px;
-}
-
-.box{
-  border:1px solid #8433db;
-  border-radius:17px;
-  background:#0d0a2d;
-  padding:11px;
-  min-height:155px;
-}
-
-.box-head{
-  display:flex;
-  justify-content:space-between;
-  color:#f05aff;
-  font-size:13px;
-  font-weight:bold;
-  margin-bottom:10px;
-}
-
-.card{
-  border:1px solid #51238e;
-  border-radius:12px;
-  padding:8px;
-  margin-top:7px;
-  background:#17103a;
-  font-size:10px;
-}
-
-.card strong{
-  color:#d9a4ff;
-  font-size:11px;
-}
-
-.card small{
-  color:#a995c0;
-  display:block;
-  margin-top:5px;
-}
-
-.card-button{
-  width:100%;
-  margin-top:8px;
-  padding:8px;
-  border-radius:15px;
-  border:1px solid #c13cff;
-  background:#360b55;
-  color:#ff73ff;
-  font-size:11px;
-}
-
-/* SECURITY */
-
-.security{
-  margin:10px 20px;
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:8px;
-}
-
-.security-box{
-  border:1px solid #08dcb5;
-  border-radius:17px;
-  padding:10px;
-  background:#062c2b;
-  text-align:center;
-}
-
-.security-box strong{
-  color:#00e8c0;
-  font-size:11px;
-}
-
-.security-box small{
-  display:block;
-  color:#8dded1;
-  font-size:8px;
-  margin-top:5px;
-}
-
-.security-box.purple{
-  border-color:#8634db;
-  background:#160b35;
-}
-
-.security-box.purple strong{
-  color:#f35cff;
-}
-
-/* NAV */
-
-.bottom-nav{
-  position:sticky;
-  bottom:0;
-  z-index:20;
-  margin:10px 20px;
-  border:1px solid #7130c8;
-  border-radius:20px;
-  background:#100735ee;
-  backdrop-filter:blur(12px);
-  display:grid;
-  grid-template-columns:repeat(5,1fr);
-  padding:6px 3px;
-}
-
-.nav-item{
-  border:0;
-  background:transparent;
-  color:#9d86bb;
-  padding:7px 2px;
-  font-size:9px;
-}
-
-.nav-icon{
-  display:block;
-  font-size:21px;
-  margin-bottom:3px;
-}
-
-.nav-item.active{
-  color:#ff59f4;
-  text-shadow:0 0 10px #ff00e6;
-}
-
-/* GAMES */
-
-.games{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:14px;
-  padding:15px 24px;
-}
-
-.game-card{
-  min-height:130px;
-  border:1px solid #a038f0;
-  border-radius:22px;
-  background:linear-gradient(145deg,#160d42,#09072a);
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  color:#fff;
-  box-shadow:0 0 18px #8b1fff18;
-  transition:.15s;
-}
-
-.game-card:active{
-  transform:scale(.96);
-}
-
-.game-card span{
-  font-size:15px;
-  font-weight:bold;
-}
-
-.game-card small{
-  color:#b9a3d5;
-  margin-top:10px;
-}
-
-/* OVERLAY */
-
-.overlay{
-  position:fixed;
-  inset:0;
-  z-index:100;
-  background:#000b;
-  display:none;
-  align-items:flex-end;
-}
-
-.overlay.show{
-  display:flex;
-}
-
-.panel{
-  width:100%;
-  max-width:520px;
-  margin:auto;
-  padding:20px;
-  background:#100822;
-  border:1px solid #9c35ed;
-  border-bottom:0;
-  border-radius:25px 25px 0 0;
-  box-shadow:0 -10px 40px #8d22ff55;
-}
-
-.panel-head{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:15px;
-}
-
-.panel-title{
-  color:#ff64ff;
-  font-size:21px;
-  font-weight:bold;
-}
-
-.close{
-  width:43px;
-  height:43px;
-  border-radius:14px;
-  border:1px solid #8e34d5;
-  background:#1b0d32;
-  color:white;
-  font-size:25px;
-}
-
-.menu-option{
-  width:100%;
-  padding:17px;
-  margin-top:9px;
-  border:1px solid #4f2780;
-  border-radius:17px;
-  background:#17102d;
-  color:#fff;
-  text-align:right;
-  font-size:15px;
-}
-
-/* TOAST */
-
-.toast{
-  position:fixed;
-  left:50%;
-  bottom:90px;
-  transform:translateX(-50%) translateY(20px);
-  background:#200c39;
-  border:1px solid #c23cff;
-  border-radius:16px;
-  padding:12px 18px;
-  color:#fff;
-  opacity:0;
-  pointer-events:none;
-  transition:.25s;
-  z-index:500;
-  font-size:12px;
-  white-space:nowrap;
-}
-
-.toast.show{
-  opacity:1;
-  transform:translateX(-50%) translateY(0);
-}
-
-@media(max-width:390px){
-
-  .game-info{
-    grid-template-columns:1.1fr repeat(4,.8fr);
-  }
-
-  .game-info b{
-    font-size:10px;
-  }
-
-  .game-name{
-    font-size:12px;
-  }
-
-  .games{
-    padding-left:18px;
-    padding-right:18px;
-  }
-
-}
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+  <meta name="theme-color" content="#08051b">
+  <title>اتحادیه منچرز</title>
+
+  <style>
+    *{box-sizing:border-box}
+
+    :root{
+      --bg:#07041a;
+      --bg2:#0b0622;
+      --card:#090622;
+      --line:#6b35b7;
+      --line2:#3c276e;
+      --purple:#b75be8;
+      --pink:#d85cd4;
+      --text:#f4f0ff;
+      --muted:#8f88a9;
+      --muted2:#6e6789;
+    }
+
+    html,body{
+      margin:0;
+      min-height:100%;
+      background:var(--bg);
+      color:var(--text);
+      font-family:Tahoma,"Segoe UI",sans-serif
+    }
+
+    body{overflow-x:hidden}
+
+    button,a{
+      font:inherit;
+      color:inherit
+    }
+
+    a{
+      text-decoration:none
+    }
+
+    .app{
+      width:min(100%,720px);
+      margin:auto;
+      min-height:100vh;
+      padding:28px 18px 118px;
+      background:
+        radial-gradient(ellipse at 50% 12%,rgba(110,35,180,.18),transparent 42%),
+        radial-gradient(ellipse at 50% 62%,rgba(100,24,150,.12),transparent 45%),
+        linear-gradient(180deg,#09041e 0%,#070419 100%);
+    }
+
+    .topbar{
+      height:150px;
+      display:grid;
+      grid-template-columns:150px 1fr 90px;
+      align-items:center;
+      gap:8px
+    }
+
+    .header-tools{
+      display:flex;
+      gap:14px;
+      align-items:center;
+      direction:ltr
+    }
+
+    .tool{
+      background:transparent;
+      border:1px solid #5d566d;
+      border-radius:0;
+      width:58px;
+      height:78px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:#b862e8;
+      cursor:pointer
+    }
+
+    .square-dots{
+      flex-direction:column;
+      gap:7px
+    }
+
+    .square-dots i{
+      width:7px;
+      height:7px;
+      border-radius:50%;
+      background:#b862e8;
+      display:block
+    }
+
+    .club{
+      font-size:50px;
+      font-family:Georgia,serif
+    }
+
+    .hamburger{
+      width:76px;
+      height:78px;
+      justify-self:end;
+      flex-direction:column;
+      gap:9px
+    }
+
+    .hamburger span{
+      width:43px;
+      height:7px;
+      background:#77737c;
+      display:block
+    }
+
+    .brand{
+      text-align:center;
+      direction:rtl
+    }
+
+    .brand-en{
+      font-family:cursive;
+      font-style:italic;
+      font-size:52px;
+      line-height:1;
+      color:#c35fdf;
+      text-shadow:0 0 16px rgba(195,95,223,.18)
+    }
+
+    .brand-fa{
+      font-size:20px;
+      font-weight:700;
+      color:#b56ad0;
+      margin-top:10px
+    }
+
+    .balance-card{
+      border:1px solid #6536a4;
+      border-radius:44px 44px 42px 42px;
+      overflow:hidden;
+      background:linear-gradient(180deg,rgba(10,6,34,.98),rgba(7,4,25,.98));
+      box-shadow:0 0 35px rgba(109,31,166,.09)
+    }
+
+    .balance-main{
+      min-height:330px;
+      padding:35px 30px 24px;
+      display:flex;
+      align-items:center;
+      gap:24px;
+      direction:ltr
+    }
+
+    .crown{
+      width:40%;
+      font-size:88px;
+      text-align:center;
+      color:#aaa;
+      filter:drop-shadow(0 7px 4px #000);
+      font-family:Georgia,serif
+    }
+
+    .balance-info{
+      flex:1;
+      text-align:right;
+      direction:rtl
+    }
+
+    .label{
+      font-size:31px;
+      color:#858098;
+      margin-bottom:18px
+    }
+
+    .amount{
+      white-space:nowrap;
+      display:flex;
+      align-items:baseline;
+      gap:8px;
+      justify-content:flex-start;
+      direction:rtl
+    }
+
+    .amount b{
+      font-size:38px;
+      letter-spacing:1px
+    }
+
+    .amount span{
+      font-size:22px;
+      color:#cf5cda;
+      font-weight:700
+    }
+
+    .details{
+      margin-top:32px;
+      border:1px solid #8038cf;
+      border-radius:34px;
+      padding:12px 27px;
+      background:transparent;
+      color:#a66bbd;
+      cursor:pointer;
+      font-size:18px
+    }
+
+    .stats{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      border-top:1px solid #40315d;
+      direction:rtl
+    }
+
+    .stat{
+      min-height:145px;
+      padding:24px 10px 18px;
+      text-align:center;
+      border-left:1px solid #40315d;
+      color:#9189a8;
+      font-size:21px;
+      line-height:1.55
+    }
+
+    .stat:first-child{
+      border-left:0
+    }
+
+    .stat strong{
+      display:block;
+      color:#fff;
+      font-size:30px;
+      margin-top:8px
+    }
+
+    .quick-grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:18px;
+      margin-top:28px;
+      direction:rtl
+    }
+
+    .quick{
+      min-height:226px;
+      border:1px solid #6334a2;
+      border-radius:50px;
+      background:linear-gradient(180deg,#090622,#08051f);
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      cursor:pointer;
+      box-shadow:0 0 22px rgba(99,52,162,.06)
+    }
+
+    .quick.small{
+      min-height:205px
+    }
+
+    .quick-icon{
+      height:78px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:#fff
+    }
+
+    .gamepad{
+      font-size:76px;
+      line-height:1;
+      transform:rotate(-8deg)
+    }
+
+    .bolt{
+      font-size:86px;
+      font-weight:900;
+      line-height:1
+    }
+
+    .finance{
+      font-size:72px;
+      line-height:1
+    }
+
+    .ring{
+      font-size:80px
+    }
+
+    .circle{
+      font-size:76px
+    }
+
+    .quick-title{
+      font-size:23px;
+      font-weight:700
+    }
+
+    .quick-sub{
+      font-size:15px;
+      color:#7d7695
+    }
+
+    .quick:nth-child(4){
+      grid-column:2
+    }
+
+    .quick:nth-child(5){
+      grid-column:3
+    }
+
+    .history{
+      margin-top:32px;
+      border:1px solid #6334a2;
+      border-radius:42px;
+      padding:24px 22px;
+      background:#090622
+    }
+
+    .history-head{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      color:#d99de7;
+      font-size:22px;
+      font-weight:700
+    }
+
+    .history-head button{
+      border:1px solid #6d3aab;
+      border-radius:24px;
+      background:transparent;
+      padding:8px 18px;
+      color:#a996c4
+    }
+
+    .history-line{
+      display:flex;
+      justify-content:space-around;
+      margin-top:22px;
+      color:#827b9c;
+      font-size:15px;
+      align-items:center
+    }
+
+    .history-line b{
+      color:#fff;
+      font-size:23px
+    }
+
+    .bottom-nav{
+      position:fixed;
+      z-index:20;
+      bottom:10px;
+      left:50%;
+      transform:translateX(-50%);
+      width:min(calc(100% - 50px),660px);
+      height:88px;
+      border:1px solid #53327d;
+      border-radius:38px;
+      background:rgba(7,5,24,.96);
+      display:grid;
+      grid-template-columns:repeat(5,1fr);
+      overflow:hidden;
+      box-shadow:0 -8px 30px rgba(0,0,0,.28)
+    }
+
+    .nav-item{
+      border:0;
+      border-left:1px solid #392b50;
+      background:transparent;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      gap:4px;
+      color:#8b83a6;
+      cursor:pointer
+    }
+
+    .nav-item:last-child{
+      border-left:0
+    }
+
+    .nav-item span{
+      font-size:31px;
+      line-height:1
+    }
+
+    .nav-item small{
+      font-size:14px
+    }
+
+    .nav-item.active{
+      color:#d65ad5;
+      background:linear-gradient(180deg,rgba(106,37,135,.08),rgba(106,37,135,.22))
+    }
+
+    .overlay{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,.65);
+      z-index:50;
+      display:none;
+      align-items:flex-end
+    }
+
+    .overlay.show{
+      display:flex
+    }
+
+    .sheet{
+      width:min(100%,720px);
+      margin:auto;
+      background:#0a0621;
+      border:1px solid #6937a7;
+      border-bottom:0;
+      border-radius:35px 35px 0 0;
+      padding:24px 22px 34px;
+      max-height:78vh;
+      overflow:auto;
+      position:relative
+    }
+
+    .sheet-close{
+      position:absolute;
+      left:18px;
+      top:15px;
+      width:38px;
+      height:38px;
+      border-radius:50%;
+      border:1px solid #6c3aad;
+      background:transparent;
+      font-size:27px;
+      cursor:pointer
+    }
+
+    .sheet h2{
+      margin:4px 0 22px;
+      text-align:center;
+      color:#e29ae9
+    }
+
+    .games{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:14px
+    }
+
+    .game{
+      border:1px solid #6034a1;
+      border-radius:28px;
+      background:#0b0725;
+      padding:22px 12px;
+      text-align:center;
+      cursor:pointer;
+      transition:.2s;
+      display:block
+    }
+
+    .game:active{
+      transform:scale(.97)
+    }
+
+    .game .gicon{
+      font-size:44px;
+      margin-bottom:8px
+    }
+
+    .game strong{
+      display:block;
+      font-size:19px;
+      margin-bottom:7px
+    }
+
+    .game small{
+      color:#77718e
+    }
+
+    .info{
+      border:1px solid #6034a1;
+      border-radius:25px;
+      padding:22px;
+      color:#aaa2bd;
+      line-height:2
+    }
+
+    .toast{
+      position:fixed;
+      left:50%;
+      bottom:110px;
+      transform:translateX(-50%) translateY(20px);
+      opacity:0;
+      pointer-events:none;
+      background:#17102e;
+      border:1px solid #7940ba;
+      color:#eee;
+      padding:12px 22px;
+      border-radius:28px;
+      z-index:100;
+      transition:.25s;
+      white-space:nowrap
+    }
+
+    .toast.show{
+      opacity:1;
+      transform:translateX(-50%) translateY(0)
+    }
+
+    @media(max-width:560px){
+      .app{
+        padding-left:18px;
+        padding-right:18px
+      }
+
+      .topbar{
+        grid-template-columns:124px 1fr 72px;
+        height:138px
+      }
+
+      .tool{
+        width:50px;
+        height:70px
+      }
+
+      .hamburger{
+        width:65px
+      }
+
+      .brand-en{
+        font-size:45px
+      }
+
+      .brand-fa{
+        font-size:17px
+      }
+
+      .balance-main{
+        min-height:300px;
+        padding:26px 18px
+      }
+
+      .crown{
+        font-size:70px
+      }
+
+      .label{
+        font-size:27px
+      }
+
+      .amount b{
+        font-size:31px
+      }
+
+      .amount span{
+        font-size:18px
+      }
+
+      .details{
+        font-size:16px;
+        padding:10px 20px;
+        margin-top:25px
+      }
+
+      .stat{
+        font-size:17px;
+        min-height:135px
+      }
+
+      .stat strong{
+        font-size:24px
+      }
+
+      .quick-grid{
+        gap:14px
+      }
+
+      .quick{
+        min-height:205px;
+        border-radius:43px
+      }
+
+      .quick.small{
+        min-height:190px
+      }
+
+      .quick-title{
+        font-size:21px
+      }
+
+      .history-head{
+        font-size:18px
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<div class="app">
+<main class="app">
 
-<header class="header">
+  <header class="topbar">
 
-  <div class="head-left">
-    <button class="menu-btn" onclick="openMenu()">☰</button>
-  </div>
+    <div class="header-tools">
 
-  <div class="logo">
-
-    <div class="logo-circle">
-      ET
-    </div>
-
-    <div class="logo-title">
-      ETtehadie
-    </div>
-
-    <div class="logo-sub">
-      اتحادیه منچرز
-    </div>
-
-  </div>
-
-  <div class="head-right">
-
-    <button class="head-btn"
-      onclick="toast('اعلان جدیدی ندارید')">
-      ♧
-    </button>
-
-    <button class="head-btn"
-      onclick="openMenu()">
-      ⋮
-    </button>
-
-  </div>
-
-</header>
-
-
-<!-- BALANCE -->
-
-<section class="balance">
-
-  <div class="balance-top">
-
-    <div class="wallet">
-      👛
-    </div>
-
-    <div class="balance-info">
-
-      <div class="balance-label">
-        موجودی کل
-      </div>
-
-      <div class="balance-number">
-        2,580,000
-        <span>تومان</span>
-      </div>
-
-      <button class="details"
-        onclick="toast('جزئیات موجودی')">
-        ◉ مشاهده جزئیات
+      <button class="tool square-dots" aria-label="گزینه‌ها">
+        <i></i><i></i><i></i>
       </button>
 
-    </div>
-
-    <div class="coin">
-      I
-    </div>
-
-  </div>
-
-  <div class="balance-bottom">
-
-    <div class="balance-stat">
-
-      <div class="stat-title">
-        مبلغ رزرو شده
-      </div>
-
-      <div class="stat-value pink">
-        280,000
-      </div>
+      <button class="tool club" aria-label="نشان">♣</button>
 
     </div>
 
-    <div class="balance-stat">
-
-      <div class="stat-title">
-        مبلغ رزرو انتقال
-      </div>
-
-      <div class="stat-value purple">
-        320,000
-      </div>
-
+    <div class="brand">
+      <div class="brand-en">Unione</div>
+      <div class="brand-fa">اتحادیه منچرز</div>
     </div>
 
-    <div class="balance-stat">
-
-      <div class="stat-title">
-        موجودی قابل برداشت
-      </div>
-
-      <div class="stat-value green">
-        1,980,000
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- STATS -->
-
-<section class="section">
-
-  <div class="section-head">
-
-    <div class="section-title">
-      📊 آمار بازی‌های ۲۴ ساعت گذشته
-    </div>
-
-    <button class="more"
-      onclick="toast('فیلتر آمار')">
-      منبع⌄
+    <button class="tool hamburger" aria-label="منو">
+      <span></span>
+      <span></span>
+      <span></span>
     </button>
 
-  </div>
+  </header>
 
 
-  <div class="game-row">
+  <section class="balance-card">
 
-    <div class="game-icon">
-      🎲
-    </div>
+    <div class="balance-main">
 
-    <div class="game-info">
+      <div class="crown">♛</div>
 
-      <div class="game-name">
-        مارکرفت
-      </div>
+      <div class="balance-info">
 
-      <div>
-        <small>تعداد بازی</small>
-        <b>12</b>
-      </div>
+        <div class="label">موجودی کل</div>
 
-      <div>
-        <small>برد</small>
-        <b class="green">8</b>
-      </div>
+        <div class="amount">
+          <b>۲,۵۸۰,۰۰۰</b>
+          <span>تومان</span>
+        </div>
 
-      <div>
-        <small>باخت</small>
-        <b class="pink">4</b>
-      </div>
+        <button class="details" onclick="toast('جزئیات موجودی')">
+          ◉ مشاهده جزئیات
+        </button>
 
-      <div>
-        <small>سود خالص</small>
-        <b class="green">+1,240,000</b>
       </div>
 
     </div>
 
-  </div>
 
+    <div class="stats">
 
-  <div class="game-row">
-
-    <div class="game-icon">
-      🎲
-    </div>
-
-    <div class="game-info">
-
-      <div class="game-name">
-        ماینکرفت
+      <div class="stat">
+        <div>موجودی قابل<br>برداشت</div>
+        <strong>۱,۹۸۰,۰۰۰</strong>
       </div>
 
-      <div>
-        <small>تعداد بازی</small>
-        <b>7</b>
+      <div class="stat">
+        <div>مبلغ در انتظار</div>
+        <strong>۳۲۰,۰۰۰</strong>
       </div>
 
-      <div>
-        <small>برد</small>
-        <b class="green">5</b>
-      </div>
-
-      <div>
-        <small>باخت</small>
-        <b class="pink">2</b>
-      </div>
-
-      <div>
-        <small>سود خالص</small>
-        <b class="green">+860,000</b>
+      <div class="stat">
+        <div>مبلغ رزرو<br>شده</div>
+        <strong>۲۸۰,۰۰۰</strong>
       </div>
 
     </div>
 
-  </div>
-
-</section>
+  </section>
 
 
-<!-- CARDS / HISTORY -->
+  <section class="quick-grid">
 
-<div class="two">
+    <button class="quick" onclick="openPanel('games')">
 
-  <div class="box">
+      <div class="quick-icon gamepad">⌁</div>
 
-    <div class="box-head">
-      <span>💳 کارت‌های من</span>
-      <span>مشاهده همه</span>
-    </div>
+      <div class="quick-title">بازی‌ها</div>
 
-    <div class="card">
-
-      <strong>
-        کارت شماره ۱
-      </strong>
-
-      <small>
-        ۱۴۰۵/۰۵/۱۴
-      </small>
-
-    </div>
-
-    <button class="card-button"
-      onclick="toast('افزودن کارت جدید')">
-
-      ＋ افزودن کارت جدید
+      <div class="quick-sub">همه بازی‌ها</div>
 
     </button>
 
-  </div>
 
+    <button class="quick" onclick="toast('عملیات سریع ماینر')">
 
-  <div class="box">
+      <div class="quick-icon bolt">ϟ</div>
 
-    <div class="box-head">
-      <span>◷ تاریخچه بازی‌ها</span>
-      <span>همه</span>
-    </div>
+      <div class="quick-title">ماینر</div>
 
-    <div class="card">
+      <div class="quick-sub">عملیات سریع</div>
 
-      <strong>
-        🎲 مارکرفت
-      </strong>
+    </button>
 
-      <small class="green">
-        سود +320,000
-      </small>
 
-    </div>
+    <button class="quick" onclick="toast('واریز / برداشت')">
 
-    <div class="card">
+      <div class="quick-icon finance">□</div>
 
-      <strong>
-        🎲 ماینکرفت
-      </strong>
+      <div class="quick-title">مالی</div>
 
-      <small class="pink">
-        زیان -150,000
-      </small>
+      <div class="quick-sub">واریز / برداشت</div>
 
-    </div>
+    </button>
 
-  </div>
 
-</div>
+    <button class="quick small" onclick="openPanel('security')">
 
+      <div class="quick-icon ring">◎</div>
 
-<!-- SECURITY -->
+      <div class="quick-title">امنیت</div>
 
-<div class="security">
+      <div class="quick-sub">اثر انگشت</div>
 
-  <div class="security-box">
+    </button>
 
-    <strong>
-      🛡 سیستم امنیتی فعال است
-    </strong>
 
-    <small>
-      حفاظت چندلایه، رمزگذاری پیشرفته، نظارت ۲۴ ساعته
-    </small>
+    <button class="quick small" onclick="openPanel('account')">
 
-  </div>
+      <div class="quick-icon circle">●</div>
 
-  <div class="security-box purple">
+      <div class="quick-title">حساب</div>
 
-    <strong>
-      ◉ ورود امن
-    </strong>
+      <div class="quick-sub">پروفایل و تنظیمات</div>
 
-    <small>
-      با اثر انگشت یا PIN وارد شوید
-    </small>
+    </button>
 
-  </div>
+  </section>
 
-</div>
 
+  <section class="history">
 
-<!-- BOTTOM NAV -->
+    <div class="history-head">
 
-<nav class="bottom-nav">
+      <span>آمار بازی‌های ۲۴ ساعت گذشته</span>
 
-  <button class="nav-item active"
-    onclick="nav(this,'خانه')">
-
-    <span class="nav-icon">
-      ⌂
-    </span>
-
-    خانه
-
-  </button>
-
-
-  <button class="nav-item"
-    onclick="nav(this,'بازی‌ها')">
-
-    <span class="nav-icon">
-      🎮
-    </span>
-
-    بازی‌ها
-
-  </button>
-
-
-  <button class="nav-item"
-    onclick="nav(this,'ماینیز')">
-
-    <span class="nav-icon">
-      ϟ
-    </span>
-
-    ماینیز
-
-  </button>
-
-
-  <button class="nav-item"
-    onclick="nav(this,'مالی')">
-
-    <span class="nav-icon">
-      👛
-    </span>
-
-    مالی
-
-  </button>
-
-
-  <button class="nav-item"
-    onclick="nav(this,'حساب')">
-
-    <span class="nav-icon">
-      ●
-    </span>
-
-    حساب
-
-  </button>
-
-</nav>
-
-
-<!-- GAMES -->
-
-<div class="games">
-
-  <!-- PLATO -->
-
-  <a
-    class="game-card"
-    href="https://play.google.com/store/apps/details?id=com.plato.android.mena"
-    target="_blank"
-    rel="noopener">
-
-    <span>
-      🎯 پلاتو
-    </span>
-
-    <small>
-      Google Play
-    </small>
-
-  </a>
-
-
-  <!-- BACKGAMMON -->
-
-  <a
-    class="game-card"
-    href="https://play.google.com/store/apps/details?id=io.coolplay.backgammon"
-    target="_blank"
-    rel="noopener">
-
-    <span>
-      🎲 تخته نرد
-    </span>
-
-    <small>
-      Google Play
-    </small>
-
-  </a>
-
-
-  <!-- LUDO -->
-
-  <a
-    class="game-card"
-    href="https://play.google.com/store/apps/details?id=com.cleverlife.ludo"
-    target="_blank"
-    rel="noopener">
-
-    <span>
-      🟠 لودو
-    </span>
-
-    <small>
-      Google Play
-    </small>
-
-  </a>
-
-</div>
-
-</div>
-
-
-<!-- MENU -->
-
-<div id="overlay"
-     class="overlay"
-     onclick="closeMenu(event)">
-
-  <div class="panel"
-       onclick="event.stopPropagation()">
-
-    <div class="panel-head">
-
-      <div class="panel-title">
-        منوی اتحادیه
-      </div>
-
-      <button class="close"
-        onclick="closeMenu()">
-        ×
+      <button onclick="toast('فیلتر آمار')">
+        منچ ۷
       </button>
 
     </div>
 
 
-    <button class="menu-option"
-      onclick="menuAction('بازی‌ها')">
-      🎮 بازی‌ها
+    <div class="history-line">
+
+      <span>بازی‌ها</span>
+      <b>۱۲</b>
+
+      <span>برد</span>
+      <b>۸</b>
+
+      <span>باخت</span>
+      <b>۴</b>
+
+    </div>
+
+  </section>
+
+
+  <nav class="bottom-nav">
+
+    <button class="nav-item active" onclick="setActive(this)">
+      <span>⌂</span>
+      <small>خانه</small>
     </button>
 
-
-    <button class="menu-option"
-      onclick="menuAction('حساب کاربری')">
-      👤 حساب کاربری
+    <button class="nav-item" onclick="openPanel('games');setActive(this)">
+      <span>⌘</span>
+      <small>بازی‌ها</small>
     </button>
 
-
-    <button class="menu-option"
-      onclick="menuAction('امنیت')">
-      🔐 امنیت
+    <button class="nav-item" onclick="toast('ماینر');setActive(this)">
+      <span>ϟ</span>
+      <small>ماینر</small>
     </button>
 
-
-    <button class="menu-option"
-      onclick="menuAction('تنظیمات')">
-      ⚙️ تنظیمات
+    <button class="nav-item" onclick="toast('مالی');setActive(this)">
+      <span>□</span>
+      <small>مالی</small>
     </button>
 
-
-    <button class="menu-option"
-      onclick="menuAction('درباره اتحادیه')">
-      ℹ️ درباره اتحادیه
+    <button class="nav-item" onclick="openPanel('account');setActive(this)">
+      <span>●</span>
+      <small>حساب</small>
     </button>
 
-  </div>
+  </nav>
+
+</main>
+
+
+<div class="overlay" id="overlay" onclick="closePanel(event)">
+
+  <section class="sheet" id="sheet">
+
+    <button class="sheet-close" onclick="closePanel()">
+      ×
+    </button>
+
+    <h2 id="sheet-title">بازی‌ها</h2>
+
+    <div id="sheet-content"></div>
+
+  </section>
 
 </div>
 
 
-<div id="toast" class="toast"></div>
+<div class="toast" id="toast"></div>
 
 
 <script>
 
-const tg = window.Telegram?.WebApp;
+const games = [
 
-if(tg){
+  {
+    icon:"🎮",
+    name:"منچرز",
+    text:"دانلود مستقیم از Google Play",
+    url:"https://play.google.com/store/apps/details?id=com.incyteltech.mencherz"
+  },
 
-  tg.ready();
+  {
+    icon:"⛏️",
+    name:"مارکرفت",
+    text:"دانلود از Google Play",
+    url:"https://play.google.com/store/apps/details?id=com.mojang.minecraftpe"
+  },
 
-  tg.expand();
+  {
+    icon:"🎲",
+    name:"تخته‌نرد پلاتو",
+    text:"Plato - Google Play",
+    url:"https://play.google.com/store/apps/details?id=com.plato.android.mena"
+  },
+
+  {
+    icon:"🃏",
+    name:"حکم سوبرا",
+    text:"سوبرا - Google Play",
+    url:"https://play.google.com/store/apps/details?id=subra.v2.app"
+  }
+
+];
+
+
+function toast(msg){
+
+  const el=document.getElementById("toast");
+
+  el.textContent=msg;
+
+  el.classList.add("show");
+
+  clearTimeout(window.__toast);
+
+  window.__toast=setTimeout(
+    ()=>el.classList.remove("show"),
+    1700
+  );
 
 }
 
 
-/* MENU */
+function openPanel(type){
 
-function openMenu(){
+  const overlay=document.getElementById("overlay");
 
-  document
-    .getElementById("overlay")
-    .classList.add("show");
+  const title=document.getElementById("sheet-title");
+
+  const content=document.getElementById("sheet-content");
+
+
+  if(type==="games"){
+
+    title.textContent="بازی‌ها";
+
+
+    content.innerHTML=`
+
+      <div class="games">
+
+        ${games.map(g => `
+
+          <a
+            class="game"
+            href="${g.url}"
+            target="_blank"
+            rel="noopener"
+          >
+
+            <div class="gicon">${g.icon}</div>
+
+            <strong>${g.name}</strong>
+
+            <small>${g.text}</small>
+
+          </a>
+
+        `).join("")}
+
+      </div>
+
+    `;
+
+  }
+
+
+  else if(type==="security"){
+
+    title.textContent="امنیت";
+
+    content.innerHTML=`
+
+      <div class="info">
+
+        امنیت حساب و ورود سریع در این بخش قرار می‌گیرد.
+
+        <br>
+
+        اثر انگشت دستگاه بعد از اتصال Mini App به محیط امن Telegram فعال می‌شود.
+
+      </div>
+
+    `;
+
+  }
+
+
+  else{
+
+    title.textContent="حساب";
+
+    content.innerHTML=`
+
+      <div class="info">
+
+        پروفایل، تنظیمات و اطلاعات حساب در این بخش قرار می‌گیرد.
+
+      </div>
+
+    `;
+
+  }
+
+
+  overlay.classList.add("show");
 
 }
 
 
-function closeMenu(e){
+function closePanel(e){
 
-  if(!e || e.target.id === "overlay"){
+  if(
+    !e ||
+    e.target.id==="overlay"
+  ){
 
     document
       .getElementById("overlay")
@@ -1144,59 +967,18 @@ function closeMenu(e){
 }
 
 
-/* TOAST */
-
-function toast(message){
-
-  const el =
-    document.getElementById("toast");
-
-  el.textContent = message;
-
-  el.classList.add("show");
-
-  clearTimeout(window.__toast);
-
-  window.__toast =
-    setTimeout(()=>{
-
-      el.classList.remove("show");
-
-    },1800);
-
-}
-
-
-/* MENU ACTION */
-
-function menuAction(name){
-
-  closeMenu();
-
-  toast(
-    name + " — به‌زودی فعال می‌شود"
-  );
-
-}
-
-
-/* NAV */
-
-function nav(button,name){
+function setActive(el){
 
   document
     .querySelectorAll(".nav-item")
-    .forEach(x =>
-      x.classList.remove("active")
-    );
+    .forEach(x=>x.classList.remove("active"));
 
-  button.classList.add("active");
-
-  toast("بخش " + name);
+  el.classList.add("active");
 
 }
+
 
 </script>
 
 </body>
-        </html>
+</html>
