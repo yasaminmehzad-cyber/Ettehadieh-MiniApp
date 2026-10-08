@@ -2,7 +2,7 @@
 <html lang="fa" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>اتحادیه منچرز</title>
 
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
@@ -15,142 +15,477 @@
 }
 
 body{
-  background:#070513;
+  background:
+    radial-gradient(circle at 50% 0%,#260044 0,#080016 38%,#03000b 100%);
   color:#fff;
   font-family:Tahoma,Arial,sans-serif;
   min-height:100vh;
 }
 
+button{
+  font-family:inherit;
+  cursor:pointer;
+}
+
 .app{
+  width:100%;
   max-width:520px;
   margin:auto;
-  padding:14px;
+  padding-bottom:30px;
 }
 
 /* HEADER */
+
 .header{
   height:125px;
+  position:relative;
   display:flex;
   align-items:center;
   justify-content:space-between;
-  border-bottom:1px solid rgba(170,70,255,.25);
-  margin-bottom:18px;
-}
-
-.menu{
-  width:48px;
-  height:48px;
-  border:1px solid #a63cff;
-  border-radius:15px;
-  background:#120b25;
-  color:#ed54ff;
-  font-size:27px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  cursor:pointer;
-}
-
-.logo{
-  text-align:center;
-}
-
-.logo-title{
-  font-size:34px;
-  font-weight:900;
-  color:#f37cff;
-  text-shadow:0 0 18px #b400ff;
-}
-
-.logo-sub{
-  color:#ef55ff;
-  font-size:14px;
-  font-weight:bold;
-  margin-top:5px;
-}
-
-/* BALANCE */
-.balance{
-  border:1px solid #8c35ff;
-  border-radius:25px;
-  background:linear-gradient(145deg,#0e0925,#0a0a1d);
-  box-shadow:0 0 25px rgba(135,35,255,.15);
+  padding:8px 18px 0;
   overflow:hidden;
 }
 
-.balance-main{
-  padding:22px 20px;
+.header:before{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  top:0;
+  height:120px;
+  background:
+    radial-gradient(circle,#a900ff55 0,transparent 55%);
+  pointer-events:none;
 }
 
-.balance-title{
-  color:#bca7e8;
-  font-size:17px;
-  font-weight:bold;
-  margin-bottom:18px;
+.menu-btn,
+.head-btn{
+  position:relative;
+  z-index:2;
+  width:44px;
+  height:44px;
+  border:0;
+  background:transparent;
+  color:#f05aff;
+  font-size:29px;
 }
 
-.balance-row{
+.head-left,
+.head-right{
   display:flex;
   align-items:center;
-  justify-content:space-between;
-  gap:12px;
+  gap:5px;
 }
 
-.wallet{
-  width:68px;
-  height:68px;
-  border-radius:18px;
-  border:1px solid #a63cff;
+.logo{
+  position:absolute;
+  left:50%;
+  top:4px;
+  transform:translateX(-50%);
+  width:190px;
+  height:115px;
+  text-align:center;
+  z-index:1;
+}
+
+.logo-circle{
+  width:75px;
+  height:75px;
+  margin:auto;
+  border:3px solid #e6a929;
+  border-radius:50%;
+  background:
+    radial-gradient(circle,#ffd65c 0,#8e4700 42%,#16080b 70%);
+  box-shadow:0 0 20px #ffae00aa;
   display:flex;
   align-items:center;
   justify-content:center;
-  background:#15102b;
-  font-size:34px;
-}
-
-.amount{
-  flex:1;
-  text-align:center;
-}
-
-.amount-number{
+  color:#ffe58a;
   font-size:27px;
   font-weight:900;
 }
 
-.toman{
-  color:#f35cff;
+.logo-title{
+  color:#ff55ff;
+  font-size:21px;
+  font-weight:900;
+  text-shadow:0 0 12px #d000ff;
+  margin-top:-2px;
+}
+
+.logo-sub{
+  color:#ff65ff;
   font-size:13px;
+  font-weight:bold;
+}
+
+/* BALANCE */
+
+.balance{
+  margin:0 20px 12px;
+  border:1px solid #9f32ff;
+  border-radius:19px;
+  overflow:hidden;
+  background:
+    linear-gradient(135deg,#171044,#0b092b);
+  box-shadow:
+    0 0 18px #8d20ff33,
+    inset 0 0 30px #b000ff0d;
+}
+
+.balance-top{
+  min-height:130px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:13px;
+  background:
+    radial-gradient(circle at 85% 50%,#e000ff30,transparent 42%);
+}
+
+.wallet{
+  width:70px;
+  height:70px;
+  border:1px solid #d144ff;
+  border-radius:16px;
+  background:linear-gradient(145deg,#8d16c9,#24104d);
+  box-shadow:0 0 15px #c000ff55;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:36px;
+}
+
+.balance-info{
+  flex:1;
+  padding:0 10px;
+}
+
+.balance-label{
+  color:#fff;
+  font-size:15px;
+  font-weight:bold;
+}
+
+.balance-number{
+  font-size:28px;
+  font-weight:900;
+  margin-top:6px;
+}
+
+.balance-number span{
+  color:#ff55ff;
+  font-size:14px;
+}
+
+.details{
+  margin-top:8px;
+  padding:5px 12px;
+  border:1px solid #a632ff;
+  border-radius:20px;
+  background:#210a3b;
+  color:#ff6cff;
+  font-size:11px;
+}
+
+.coin{
+  width:85px;
+  height:85px;
+  border-radius:50%;
+  border:3px solid #e5a72e;
+  background:radial-gradient(circle,#ffda55,#9b4d00 55%,#210a05);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:31px;
+  box-shadow:0 0 18px #ffb00055;
+}
+
+.balance-bottom{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  border-top:1px solid #7130aa;
+}
+
+.balance-stat{
+  text-align:center;
+  padding:11px 5px;
+  min-height:58px;
+}
+
+.balance-stat+ .balance-stat{
+  border-right:1px solid #7130aa;
+}
+
+.stat-title{
+  color:#d2b9ee;
+  font-size:10px;
+}
+
+.stat-value{
+  font-size:16px;
+  font-weight:bold;
   margin-top:5px;
 }
 
-.balance-actions{
+.green{color:#00e5ad}
+.pink{color:#ff35a9}
+.purple{color:#b76cff}
+
+/* SECTION */
+
+.section{
+  margin:12px 20px;
+  border:1px solid #8231d0;
+  border-radius:18px;
+  background:#0d0a2c;
+  padding:12px;
+  box-shadow:0 0 18px #8c20ff1c;
+}
+
+.section-head{
   display:flex;
-  border-top:1px solid rgba(170,70,255,.25);
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:10px;
 }
 
-.balance-actions button{
-  flex:1;
-  padding:16px;
-  background:none;
+.section-title{
+  color:#f45cff;
+  font-size:16px;
+  font-weight:900;
+}
+
+.more{
+  border:1px solid #9138e8;
+  border-radius:18px;
+  background:#160d35;
+  color:#d99cff;
+  padding:7px 12px;
+  font-size:10px;
+}
+
+/* GAME STATS */
+
+.game-row{
+  display:grid;
+  grid-template-columns:65px 1fr;
+  align-items:center;
+  gap:8px;
+  padding:9px;
+  margin-top:8px;
+  border:1px solid #56229a;
+  border-radius:17px;
+  background:linear-gradient(90deg,#1a0b4b,#090a2c);
+}
+
+.game-icon{
+  width:58px;
+  height:58px;
+  border-radius:15px;
+  background:linear-gradient(145deg,#a626df,#29105e);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:32px;
+  box-shadow:0 0 13px #b000ff55;
+}
+
+.game-info{
+  display:grid;
+  grid-template-columns:1.2fr repeat(4,1fr);
+  align-items:center;
+  text-align:center;
+}
+
+.game-name{
+  text-align:right;
+  font-weight:bold;
+  font-size:14px;
+}
+
+.game-info small{
+  color:#a993c6;
+  font-size:8px;
+  display:block;
+  margin-bottom:3px;
+}
+
+.game-info b{
+  font-size:12px;
+}
+
+/* TWO BOXES */
+
+.two{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin:12px 20px;
+}
+
+.box{
+  border:1px solid #8433db;
+  border-radius:17px;
+  background:#0d0a2d;
+  padding:11px;
+  min-height:155px;
+}
+
+.box-head{
+  display:flex;
+  justify-content:space-between;
+  color:#f05aff;
+  font-size:13px;
+  font-weight:bold;
+  margin-bottom:10px;
+}
+
+.card{
+  border:1px solid #51238e;
+  border-radius:12px;
+  padding:8px;
+  margin-top:7px;
+  background:#17103a;
+  font-size:10px;
+}
+
+.card strong{
+  color:#d9a4ff;
+  font-size:11px;
+}
+
+.card small{
+  color:#a995c0;
+  display:block;
+  margin-top:5px;
+}
+
+.card-button{
+  width:100%;
+  margin-top:8px;
+  padding:8px;
+  border-radius:15px;
+  border:1px solid #c13cff;
+  background:#360b55;
+  color:#ff73ff;
+  font-size:11px;
+}
+
+/* SECURITY */
+
+.security{
+  margin:10px 20px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+}
+
+.security-box{
+  border:1px solid #08dcb5;
+  border-radius:17px;
+  padding:10px;
+  background:#062c2b;
+  text-align:center;
+}
+
+.security-box strong{
+  color:#00e8c0;
+  font-size:11px;
+}
+
+.security-box small{
+  display:block;
+  color:#8dded1;
+  font-size:8px;
+  margin-top:5px;
+}
+
+.security-box.purple{
+  border-color:#8634db;
+  background:#160b35;
+}
+
+.security-box.purple strong{
+  color:#f35cff;
+}
+
+/* NAV */
+
+.bottom-nav{
+  position:sticky;
+  bottom:0;
+  z-index:20;
+  margin:10px 20px;
+  border:1px solid #7130c8;
+  border-radius:20px;
+  background:#100735ee;
+  backdrop-filter:blur(12px);
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  padding:6px 3px;
+}
+
+.nav-item{
   border:0;
+  background:transparent;
+  color:#9d86bb;
+  padding:7px 2px;
+  font-size:9px;
+}
+
+.nav-icon{
+  display:block;
+  font-size:21px;
+  margin-bottom:3px;
+}
+
+.nav-item.active{
+  color:#ff59f4;
+  text-shadow:0 0 10px #ff00e6;
+}
+
+/* GAME CARDS */
+
+.games{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px;
+  padding:15px 24px;
+}
+
+.game-card{
+  min-height:130px;
+  border:1px solid #a038f0;
+  border-radius:22px;
+  background:linear-gradient(145deg,#160d42,#09072a);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
   color:#fff;
+  box-shadow:0 0 18px #8b1fff18;
+}
+
+.game-card span{
   font-size:15px;
-  cursor:pointer;
+  font-weight:bold;
 }
 
-.balance-actions button+button{
-  border-right:1px solid rgba(170,70,255,.25);
+.game-card small{
+  color:#b9a3d5;
+  margin-top:10px;
 }
 
-/* MENU PANEL */
+/* OVERLAY */
+
 .overlay{
   position:fixed;
   inset:0;
-  background:rgba(0,0,0,.7);
+  z-index:100;
+  background:#000b;
   display:none;
   align-items:flex-end;
-  z-index:999;
 }
 
 .overlay.show{
@@ -161,68 +496,66 @@ body{
   width:100%;
   max-width:520px;
   margin:auto;
-  background:#100a20;
-  border:1px solid #8c35ff;
+  padding:20px;
+  background:#100822;
+  border:1px solid #9c35ed;
   border-bottom:0;
   border-radius:25px 25px 0 0;
-  padding:20px;
-  box-shadow:0 -10px 40px rgba(130,30,255,.3);
+  box-shadow:0 -10px 40px #8d22ff55;
 }
 
 .panel-head{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  margin-bottom:18px;
+  margin-bottom:15px;
 }
 
-.panel-head h2{
-  color:#f37cff;
-  font-size:20px;
+.panel-title{
+  color:#ff64ff;
+  font-size:21px;
+  font-weight:bold;
 }
 
 .close{
-  width:40px;
-  height:40px;
-  border-radius:12px;
-  border:1px solid #7130aa;
-  background:#1b102e;
+  width:43px;
+  height:43px;
+  border-radius:14px;
+  border:1px solid #8e34d5;
+  background:#1b0d32;
   color:white;
-  font-size:22px;
-  cursor:pointer;
+  font-size:25px;
 }
 
-.menu-item{
+.menu-option{
   width:100%;
   padding:17px;
-  margin-top:10px;
-  border-radius:16px;
-  border:1px solid rgba(170,70,255,.3);
-  background:#171027;
-  color:white;
+  margin-top:9px;
+  border:1px solid #4f2780;
+  border-radius:17px;
+  background:#17102d;
+  color:#fff;
   text-align:right;
-  font-size:16px;
-  cursor:pointer;
-}
-
-.menu-item:hover{
-  border-color:#c04cff;
+  font-size:15px;
 }
 
 /* TOAST */
+
 .toast{
   position:fixed;
   left:50%;
-  bottom:25px;
+  bottom:90px;
   transform:translateX(-50%) translateY(20px);
-  background:#24113d;
-  border:1px solid #a63cff;
-  padding:13px 18px;
-  border-radius:14px;
+  background:#200c39;
+  border:1px solid #c23cff;
+  border-radius:16px;
+  padding:12px 18px;
+  color:#fff;
   opacity:0;
   pointer-events:none;
   transition:.25s;
-  z-index:2000;
+  z-index:500;
+  font-size:12px;
   white-space:nowrap;
 }
 
@@ -231,19 +564,18 @@ body{
   transform:translateX(-50%) translateY(0);
 }
 
-/* BUTTON */
-.main-btn{
-  width:100%;
-  margin-top:18px;
-  padding:17px;
-  border:0;
-  border-radius:18px;
-  background:linear-gradient(90deg,#8d28ff,#e64dff);
-  color:white;
-  font-size:17px;
-  font-weight:bold;
-  cursor:pointer;
-  box-shadow:0 8px 25px rgba(155,40,255,.25);
+@media(max-width:390px){
+  .game-info{
+    grid-template-columns:1.1fr repeat(4,.8fr);
+  }
+
+  .game-info b{
+    font-size:10px;
+  }
+
+  .game-name{
+    font-size:12px;
+  }
 }
 </style>
 </head>
@@ -252,64 +584,268 @@ body{
 
 <div class="app">
 
-  <header class="header">
+<header class="header">
 
-    <button class="menu" onclick="openMenu()">
-      ☰
+  <div class="head-left">
+    <button class="menu-btn" onclick="openMenu()">☰</button>
+  </div>
+
+  <div class="logo">
+    <div class="logo-circle">ET</div>
+    <div class="logo-title">ETtehadie</div>
+    <div class="logo-sub">اتحادیه منچرز</div>
+  </div>
+
+  <div class="head-right">
+    <button class="head-btn" onclick="toast('اعلان جدیدی ندارید')">♧</button>
+    <button class="head-btn" onclick="openMenu()">⋮</button>
+  </div>
+
+</header>
+
+
+<!-- BALANCE -->
+
+<section class="balance">
+
+  <div class="balance-top">
+
+    <div class="wallet">👛</div>
+
+    <div class="balance-info">
+
+      <div class="balance-label">موجودی کل</div>
+
+      <div class="balance-number">
+        2,580,000 <span>تومان</span>
+      </div>
+
+      <button class="details" onclick="toast('جزئیات موجودی')">
+        ◉ مشاهده جزئیات
+      </button>
+
+    </div>
+
+    <div class="coin">I</div>
+
+  </div>
+
+  <div class="balance-bottom">
+
+    <div class="balance-stat">
+      <div class="stat-title">مبلغ رزرو شده</div>
+      <div class="stat-value pink">280,000</div>
+    </div>
+
+    <div class="balance-stat">
+      <div class="stat-title">مبلغ رزرو انتقال</div>
+      <div class="stat-value purple">320,000</div>
+    </div>
+
+    <div class="balance-stat">
+      <div class="stat-title">موجودی قابل برداشت</div>
+      <div class="stat-value green">1,980,000</div>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- STATS -->
+
+<section class="section">
+
+  <div class="section-head">
+    <div class="section-title">📊 آمار بازی‌های ۲۴ ساعت گذشته</div>
+    <button class="more" onclick="toast('فیلتر آمار')">منبع⌄</button>
+  </div>
+
+  <div class="game-row">
+
+    <div class="game-icon">🎲</div>
+
+    <div class="game-info">
+      <div class="game-name">مارکرفت</div>
+
+      <div>
+        <small>تعداد بازی</small>
+        <b>12</b>
+      </div>
+
+      <div>
+        <small>برد</small>
+        <b class="green">8</b>
+      </div>
+
+      <div>
+        <small>باخت</small>
+        <b class="pink">4</b>
+      </div>
+
+      <div>
+        <small>سود خالص</small>
+        <b class="green">+1,240,000</b>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="game-row">
+
+    <div class="game-icon">🎲</div>
+
+    <div class="game-info">
+      <div class="game-name">ماینکرفت</div>
+
+      <div>
+        <small>تعداد بازی</small>
+        <b>7</b>
+      </div>
+
+      <div>
+        <small>برد</small>
+        <b class="green">5</b>
+      </div>
+
+      <div>
+        <small>باخت</small>
+        <b class="pink">2</b>
+      </div>
+
+      <div>
+        <small>سود خالص</small>
+        <b class="green">+860,000</b>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- CARDS / HISTORY -->
+
+<div class="two">
+
+  <div class="box">
+
+    <div class="box-head">
+      <span>💳 کارت‌های من</span>
+      <span>مشاهده همه</span>
+    </div>
+
+    <div class="card">
+      <strong>کارت شماره ۱</strong>
+      <small>۱۴۰۵/۰۵/۱۴</small>
+    </div>
+
+    <button class="card-button" onclick="toast('افزودن کارت جدید')">
+      ＋ افزودن کارت جدید
     </button>
 
-    <div class="logo">
-      <div class="logo-title">منچرز</div>
-      <div class="logo-sub">اتحادیه منچرز</div>
+  </div>
+
+
+  <div class="box">
+
+    <div class="box-head">
+      <span>◷ تاریخچه بازی‌ها</span>
+      <span>همه</span>
     </div>
 
-    <div style="width:48px;"></div>
-
-  </header>
-
-  <section class="balance">
-
-    <div class="balance-main">
-
-      <div class="balance-title">
-        موجودی حساب
-      </div>
-
-      <div class="balance-row">
-
-        <div class="wallet">
-          💰
-        </div>
-
-        <div class="amount">
-          <div class="amount-number">
-            ۰ تومان
-          </div>
-
-          <div class="toman">
-            موجودی کیف پول
-          </div>
-        </div>
-
-      </div>
-
+    <div class="card">
+      <strong>🎲 مارکرفت</strong>
+      <small class="green">زیان +320,000</small>
     </div>
 
-    <div class="balance-actions">
-      <button onclick="toast('بخش افزایش موجودی به‌زودی فعال می‌شود')">
-        ➕ افزایش موجودی
-      </button>
-
-      <button onclick="toast('بخش برداشت به‌زودی فعال می‌شود')">
-        💸 برداشت
-      </button>
+    <div class="card">
+      <strong>🎲 ماینکرفت</strong>
+      <small class="pink">زیان -150,000</small>
     </div>
 
-  </section>
+  </div>
 
-  <button class="main-btn" onclick="openGames()">
-    🎮 ورود به بازی‌ها
+</div>
+
+
+<!-- SECURITY -->
+
+<div class="security">
+
+  <div class="security-box">
+    <strong>🛡 سیستم امنیتی فعال است</strong>
+    <small>حفاظت چندلایه، رمزگذاری پیشرفته، نظارت ۲۴ ساعته</small>
+  </div>
+
+  <div class="security-box purple">
+    <strong>◉ ورود امن</strong>
+    <small>با اثر انگشت یا PIN وارد شوید</small>
+  </div>
+
+</div>
+
+
+<!-- BOTTOM NAV -->
+
+<nav class="bottom-nav">
+
+  <button class="nav-item active" onclick="nav('خانه')">
+    <span class="nav-icon">⌂</span>
+    خانه
   </button>
+
+  <button class="nav-item" onclick="nav('بازی‌ها')">
+    <span class="nav-icon">🎮</span>
+    بازی‌ها
+  </button>
+
+  <button class="nav-item" onclick="nav('ماینیز')">
+    <span class="nav-icon">ϟ</span>
+    ماینیز
+  </button>
+
+  <button class="nav-item" onclick="nav('مالی')">
+    <span class="nav-icon">👛</span>
+    مالی
+  </button>
+
+  <button class="nav-item" onclick="nav('حساب')">
+    <span class="nav-icon">●</span>
+    حساب
+  </button>
+
+</nav>
+
+
+<!-- GAMES -->
+
+<div class="games">
+
+  <button class="game-card" onclick="game('منچرز')">
+    <span>🎲 منچرز</span>
+    <small>Google Play</small>
+  </button>
+
+  <button class="game-card" onclick="game('پلاتو')">
+    <span>🎯 پلاتو — تخته نرد</span>
+    <small>Plato</small>
+  </button>
+
+  <button class="game-card" onclick="game('مارکرفت')">
+    <span>⛏ مارکرفت</span>
+    <small>کافه‌بازار</small>
+  </button>
+
+  <button class="game-card" onclick="game('سوبرا')">
+    <span>🃏 سوبرا — حکم</span>
+    <small>سایت رسمی</small>
+  </button>
+
+</div>
 
 </div>
 
@@ -322,27 +858,29 @@ body{
 
     <div class="panel-head">
 
-      <h2>منوی اتحادیه</h2>
+      <div class="panel-title">منوی اتحادیه</div>
 
-      <button class="close" onclick="closeMenu()">
-        ×
-      </button>
+      <button class="close" onclick="closeMenu()">×</button>
 
     </div>
 
-    <button class="menu-item" onclick="openGames()">
+    <button class="menu-option" onclick="menuAction('بازی‌ها')">
       🎮 بازی‌ها
     </button>
 
-    <button class="menu-item" onclick="showAccount()">
+    <button class="menu-option" onclick="menuAction('حساب کاربری')">
       👤 حساب کاربری
     </button>
 
-    <button class="menu-item" onclick="showSecurity()">
+    <button class="menu-option" onclick="menuAction('امنیت')">
       🔐 امنیت
     </button>
 
-    <button class="menu-item" onclick="showAbout()">
+    <button class="menu-option" onclick="menuAction('تنظیمات')">
+      ⚙️ تنظیمات
+    </button>
+
+    <button class="menu-option" onclick="menuAction('درباره اتحادیه')">
       ℹ️ درباره اتحادیه
     </button>
 
@@ -377,485 +915,40 @@ function closeMenu(e){
 
 function toast(message){
 
-  const el = document.getElementById("toast");
+  const el=document.getElementById("toast");
 
-  el.textContent = message;
-
+  el.textContent=message;
   el.classList.add("show");
 
-  clearTimeout(window.toastTimer);
+  clearTimeout(window.__toast);
 
-  window.toastTimer = setTimeout(function(){
-
+  window.__toast=setTimeout(()=>{
     el.classList.remove("show");
-
   },1800);
-
 }
 
-function openGames(){
+function menuAction(name){
 
   closeMenu();
-
-  toast("بخش بازی‌ها در حال آماده‌سازی است 🎮");
-
+  toast(name+" — به‌زودی فعال می‌شود");
 }
 
-function showAccount(){
+function game(name){
 
-  closeMenu();
-
-  toast("بخش حساب کاربری به‌زودی فعال می‌شود 👤");
-
+  toast("ورود به "+name+" — لینک بازی هنوز تنظیم نشده");
 }
 
-function showSecurity(){
+function nav(name){
 
-  closeMenu();
+  document.querySelectorAll(".nav-item")
+    .forEach(x=>x.classList.remove("active"));
 
-  toast("امنیت حساب فعال است 🔐");
+  event.currentTarget.classList.add("active");
 
-}
-
-function showAbout(){
-
-  closeMenu();
-
-  toast("اتحادیه منچرز 🎲");
-
+  toast("بخش "+name);
 }
 
 </script>
 
 </body>
-</html><!DOCTYPE html>
-<html lang="fa" dir="rtl">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>اتحادیه منچرز</title>
-
-<script src="https://telegram.org/js/telegram-web-app.js"></script>
-
-<style>
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-}
-
-body{
-  background:#070513;
-  color:#fff;
-  font-family:Tahoma,Arial,sans-serif;
-  min-height:100vh;
-}
-
-.app{
-  max-width:520px;
-  margin:auto;
-  padding:14px;
-}
-
-/* HEADER */
-.header{
-  height:125px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  border-bottom:1px solid rgba(170,70,255,.25);
-  margin-bottom:18px;
-}
-
-.menu{
-  width:48px;
-  height:48px;
-  border:1px solid #a63cff;
-  border-radius:15px;
-  background:#120b25;
-  color:#ed54ff;
-  font-size:27px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  cursor:pointer;
-}
-
-.logo{
-  text-align:center;
-}
-
-.logo-title{
-  font-size:34px;
-  font-weight:900;
-  color:#f37cff;
-  text-shadow:0 0 18px #b400ff;
-}
-
-.logo-sub{
-  color:#ef55ff;
-  font-size:14px;
-  font-weight:bold;
-  margin-top:5px;
-}
-
-/* BALANCE */
-.balance{
-  border:1px solid #8c35ff;
-  border-radius:25px;
-  background:linear-gradient(145deg,#0e0925,#0a0a1d);
-  box-shadow:0 0 25px rgba(135,35,255,.15);
-  overflow:hidden;
-}
-
-.balance-main{
-  padding:22px 20px;
-}
-
-.balance-title{
-  color:#bca7e8;
-  font-size:17px;
-  font-weight:bold;
-  margin-bottom:18px;
-}
-
-.balance-row{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:12px;
-}
-
-.wallet{
-  width:68px;
-  height:68px;
-  border-radius:18px;
-  border:1px solid #a63cff;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:#15102b;
-  font-size:34px;
-}
-
-.amount{
-  flex:1;
-  text-align:center;
-}
-
-.amount-number{
-  font-size:27px;
-  font-weight:900;
-}
-
-.toman{
-  color:#f35cff;
-  font-size:13px;
-  margin-top:5px;
-}
-
-.balance-actions{
-  display:flex;
-  border-top:1px solid rgba(170,70,255,.25);
-}
-
-.balance-actions button{
-  flex:1;
-  padding:16px;
-  background:none;
-  border:0;
-  color:#fff;
-  font-size:15px;
-  cursor:pointer;
-}
-
-.balance-actions button+button{
-  border-right:1px solid rgba(170,70,255,.25);
-}
-
-/* MENU PANEL */
-.overlay{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.7);
-  display:none;
-  align-items:flex-end;
-  z-index:999;
-}
-
-.overlay.show{
-  display:flex;
-}
-
-.panel{
-  width:100%;
-  max-width:520px;
-  margin:auto;
-  background:#100a20;
-  border:1px solid #8c35ff;
-  border-bottom:0;
-  border-radius:25px 25px 0 0;
-  padding:20px;
-  box-shadow:0 -10px 40px rgba(130,30,255,.3);
-}
-
-.panel-head{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:18px;
-}
-
-.panel-head h2{
-  color:#f37cff;
-  font-size:20px;
-}
-
-.close{
-  width:40px;
-  height:40px;
-  border-radius:12px;
-  border:1px solid #7130aa;
-  background:#1b102e;
-  color:white;
-  font-size:22px;
-  cursor:pointer;
-}
-
-.menu-item{
-  width:100%;
-  padding:17px;
-  margin-top:10px;
-  border-radius:16px;
-  border:1px solid rgba(170,70,255,.3);
-  background:#171027;
-  color:white;
-  text-align:right;
-  font-size:16px;
-  cursor:pointer;
-}
-
-.menu-item:hover{
-  border-color:#c04cff;
-}
-
-/* TOAST */
-.toast{
-  position:fixed;
-  left:50%;
-  bottom:25px;
-  transform:translateX(-50%) translateY(20px);
-  background:#24113d;
-  border:1px solid #a63cff;
-  padding:13px 18px;
-  border-radius:14px;
-  opacity:0;
-  pointer-events:none;
-  transition:.25s;
-  z-index:2000;
-  white-space:nowrap;
-}
-
-.toast.show{
-  opacity:1;
-  transform:translateX(-50%) translateY(0);
-}
-
-/* BUTTON */
-.main-btn{
-  width:100%;
-  margin-top:18px;
-  padding:17px;
-  border:0;
-  border-radius:18px;
-  background:linear-gradient(90deg,#8d28ff,#e64dff);
-  color:white;
-  font-size:17px;
-  font-weight:bold;
-  cursor:pointer;
-  box-shadow:0 8px 25px rgba(155,40,255,.25);
-}
-</style>
-</head>
-
-<body>
-
-<div class="app">
-
-  <header class="header">
-
-    <button class="menu" onclick="openMenu()">
-      ☰
-    </button>
-
-    <div class="logo">
-      <div class="logo-title">منچرز</div>
-      <div class="logo-sub">اتحادیه منچرز</div>
-    </div>
-
-    <div style="width:48px;"></div>
-
-  </header>
-
-  <section class="balance">
-
-    <div class="balance-main">
-
-      <div class="balance-title">
-        موجودی حساب
-      </div>
-
-      <div class="balance-row">
-
-        <div class="wallet">
-          💰
-        </div>
-
-        <div class="amount">
-          <div class="amount-number">
-            ۰ تومان
-          </div>
-
-          <div class="toman">
-            موجودی کیف پول
-          </div>
-        </div>
-
-      </div>
-
-    </div>
-
-    <div class="balance-actions">
-      <button onclick="toast('بخش افزایش موجودی به‌زودی فعال می‌شود')">
-        ➕ افزایش موجودی
-      </button>
-
-      <button onclick="toast('بخش برداشت به‌زودی فعال می‌شود')">
-        💸 برداشت
-      </button>
-    </div>
-
-  </section>
-
-  <button class="main-btn" onclick="openGames()">
-    🎮 ورود به بازی‌ها
-  </button>
-
-</div>
-
-
-<!-- MENU -->
-
-<div id="overlay" class="overlay" onclick="closeMenu(event)">
-
-  <div class="panel" onclick="event.stopPropagation()">
-
-    <div class="panel-head">
-
-      <h2>منوی اتحادیه</h2>
-
-      <button class="close" onclick="closeMenu()">
-        ×
-      </button>
-
-    </div>
-
-    <button class="menu-item" onclick="openGames()">
-      🎮 بازی‌ها
-    </button>
-
-    <button class="menu-item" onclick="showAccount()">
-      👤 حساب کاربری
-    </button>
-
-    <button class="menu-item" onclick="showSecurity()">
-      🔐 امنیت
-    </button>
-
-    <button class="menu-item" onclick="showAbout()">
-      ℹ️ درباره اتحادیه
-    </button>
-
-  </div>
-
-</div>
-
-
-<div id="toast" class="toast"></div>
-
-
-<script>
-
-const tg = window.Telegram?.WebApp;
-
-if(tg){
-  tg.ready();
-  tg.expand();
-}
-
-function openMenu(){
-  document.getElementById("overlay").classList.add("show");
-}
-
-function closeMenu(e){
-
-  if(!e || e.target.id === "overlay"){
-    document.getElementById("overlay").classList.remove("show");
-  }
-
-}
-
-function toast(message){
-
-  const el = document.getElementById("toast");
-
-  el.textContent = message;
-
-  el.classList.add("show");
-
-  clearTimeout(window.toastTimer);
-
-  window.toastTimer = setTimeout(function(){
-
-    el.classList.remove("show");
-
-  },1800);
-
-}
-
-function openGames(){
-
-  closeMenu();
-
-  toast("بخش بازی‌ها در حال آماده‌سازی است 🎮");
-
-}
-
-function showAccount(){
-
-  closeMenu();
-
-  toast("بخش حساب کاربری به‌زودی فعال می‌شود 👤");
-
-}
-
-function showSecurity(){
-
-  closeMenu();
-
-  toast("امنیت حساب فعال است 🔐");
-
-}
-
-function showAbout(){
-
-  closeMenu();
-
-  toast("اتحادیه منچرز 🎲");
-
-}
-
-</script>
-
-</body>
-</html>
+  </html>
